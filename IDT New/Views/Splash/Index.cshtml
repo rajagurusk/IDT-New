@@ -1,0 +1,31 @@
+﻿@{
+    Layout = null; // Optional: Use if this should not use your main layout
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Splash - IDT</title>
+    <style>
+        body { margin:0; padding:0; background:#fff; }
+        .centered {
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            height:100vh;
+            flex-direction:column;
+        }
+    </style>
+    <script>
+        setTimeout(function () {
+            window.location.href = '@Url.Action("Login", "Account")'; // Adjust action/controller
+        }, 3000); // 3000ms = 3 seconds
+    </script>
+</head>
+<body>
+    <div class="centered">
+        <img src="~/images/IDT-pop-up-page-1.jpg" alt="IDT" style="max-width:90vw; max-height:90vh;" />
+        <!-- You can also use styled HTML/CSS for your layout instead of just the image -->
+    </div>
+</body>
+</html>
