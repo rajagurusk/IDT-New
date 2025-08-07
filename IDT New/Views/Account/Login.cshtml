@@ -160,11 +160,16 @@
                 <div class="login-subtitle">
                     Welcome back! Please enter your details
                 </div>
-                <form method="post" asp-action="Login">
-                    <input class="input-field" type="text" name="UserID" placeholder="UserID" required />
-                    <input class="input-field" type="password" name="Password" placeholder="Password" required />
+                <form method="post" asp-action="Login" asp-controller="Account">
+                    <input class="input-field" type="text" name="userID" placeholder="UserID" required />
+                    <input class="input-field" type="password" name="password" placeholder="Password" required />
                     <button type="submit" class="login-btn">Log In</button>
                 </form>
+                @if (ViewBag.ErrorMessage != null)
+                {
+                    <div style="color:red;">@ViewBag.ErrorMessage</div>
+                }
+
             </div>
         </div>
     </div>

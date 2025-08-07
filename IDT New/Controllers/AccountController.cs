@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿// AccountController.cs
+
+using Microsoft.AspNetCore.Mvc;
 
 public class AccountController : Controller
 {
@@ -7,5 +9,20 @@ public class AccountController : Controller
     {
         return View();
     }
-    // (Optional: Add a [HttpPost] Login method later for actual authentication)
+
+    [HttpPost]
+    public IActionResult Login(string userID, string password)
+    {
+        // Simple placeholder: Replace this with actual authentication logic
+        if (userID == "IDT" && password == "IDT@123")
+        {
+            // On successful login, redirect to Home page (adjust route if needed)
+            return RedirectToAction("Index", "Home");
+        }
+        else
+        {
+            ViewBag.ErrorMessage = "Invalid credentials.";
+            return View();
+        }
+    }
 }

@@ -1,8 +1,434 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
+    Layout = null; // Remove if you want to use your shared layout
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>@ViewData["Title"]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #fff;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .idt-header {
+            width: 100%;
+            height: 60px; /* adjust if needed */
+            display: flex;
+            align-items: center;
+            position: relative; /* for absolute centering of title */
+            padding: 0 24px;
+            border-bottom: 1px solid #ede9d2;
+            background: #fff;
+            box-sizing: border-box;
+        }
+
+        /* Left content stays on left */
+        .header-left-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* Center title absolutely centered */
+        .header-title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2.2rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #222;
+            white-space: nowrap;
+            pointer-events: none; /* so clicks go through if needed */
+        }
+
+        .header-right-buttons {
+            display: flex;
+            align-items: center;
+            gap: 12px; /* smaller gap between buttons */
+            margin-left: auto; /* pushes container fully right */
+        }
+
+        /* Smaller icon size */
+        .header-icon-btn img {
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+            display: block;
+            transition: opacity 0.2s ease;
+            border: none; /* Remove any borders */
+            outline: none; /* Also remove outline if any */
+            box-shadow: none; /* Remove any shadow that may look like a border */
+        }
+
+
+
+        .main-wrap {
+            display: flex;
+            flex-direction: row;
+            flex-grow: 1;
+            min-height: 0;
+        }
+        /* Left form section */
+        .left-form {
+            background: #fffde7;
+            border-right: 1px solid #fce58d;
+            min-width: 320px;
+            max-width: 320px;
+            padding: 40px 24px;
+        }
+
+        .idt-logo {
+            width: 200px; /* Increased size from 150px to 200px */
+            display: block;
+            margin: -10px auto 12px auto; /* Moved up by setting top margin negative and reduced bottom margin */
+        }
+
+
+        .form-label {
+            font-size: 1.1rem;
+            margin: 8px 0 5px 3px;
+            color: #444;
+        }
+
+        /* Reduce input and textarea widths */
+        .idt-input,
+        .idt-remarks {
+            width: 300px; /* Reduced from 100% to fixed smaller width */
+            padding: 9px 14px;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            border: 1.5px solid #ecc204;
+            border-radius: 7px;
+            background: #fafafb;
+            box-sizing: border-box; /* Include padding/border in width */
+        }
+
+        /* Textarea height stays as you defined */
+        .idt-remarks {
+            min-height: 48px;
+            max-height: 90px;
+            resize: vertical;
+        }
+
+        /* Autofocus numeric input smaller */
+        .autofocus-input {
+            width: 50px; /* You can reduce this further if needed */
+            margin-left: 8px;
+            margin-right: 8px;
+            text-align: right;
+        }
+
+        /* Range input smaller */
+        .autofocus-wrap input[type="range"] {
+            width: 140px; /* Smaller width for the slider */
+        }
+
+        /* Center workspace grid */
+        .center-content {
+            flex-grow: 1;
+            padding: 26px 18px 10px 18px;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            justify-content: center; /* Vertically center the box */
+            align-items: center; /* Horizontally center */
+        }
+
+        .page-grid {
+            width: 100%;
+            height: 100%;
+            min-height: 600px; /* Increase min height to accommodate larger box */
+            max-width: 1000px; /* Increase max-width to allow wider box */
+        }
+
+        .grid-item {
+            width: 100%;
+            height: 600px; /* Increased height from 420px to 600px */
+            background: #fff;
+            border: 1px solid #f9e7aa;
+            border-radius: 7px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            color: #666;
+        }
+
+
+        /* Example right panel style - adjust as needed */
+        .right-panel {
+            flex: 0 0 400px; /* Fix width to 200px */
+            background-color: #fafbfe;
+            padding: 30px;
+            border-left: 1px solid #f9e7aa;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-width: unset; /* Remove min-width if necessary */
+            box-sizing: border-box; /* Include padding in width */
+        }
+
+
+
+        /* Menu bar */
+        .idt-footer-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fffde4;
+            border-top: 1.5px solid #faeeb8;
+            box-shadow: 0 -2px 16px 0 #f1e27c33;
+            user-select: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        /* Footer menu buttons */
+        .idt-footer-menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 0 6px 0;
+            width: 100%;
+        }
+
+        /* Individual Buttons - same as before */
+        .menu-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: none;
+            border: none;
+            margin: 0 6px;
+            padding: 10px 10px 4px 10px;
+            color: black; /* make the icon and text black */
+            font-size: 1.01rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.18s;
+            border-radius: 10px;
+        }
+
+            .menu-btn:hover {
+                color: #333333;
+                background: #f0f0f0;
+            }
+
+        .menu-icon {
+            font-size: 1.46rem;
+            margin-bottom: 2px;
+            display: block;
+            color: black; /* Make icons black */
+        }
+
+        /* Footer info below the menu */
+        .idt-footer-info {
+            width: 100%;
+            background: #fcc005; /* yellow background */
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* left and right align to edges */
+            padding: 8px 20px;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        /* Common style for left and right text */
+        .footer-left,
+        .footer-right {
+            color: #222;
+            font-weight: 600;
+            font-size: 1.1rem;
+            white-space: nowrap;
+        }
+
+        /* Vertical separator line */
+        .footer-separator {
+            width: 1px;
+            height: 24px; /* adjust height as needed */
+            background: #222;
+            margin: 0 15px;
+        }
+
+
+
+        @@media (max-width: 880px) {
+            .main-wrap
+
+        {
+            flex-direction: column;
+        }
+
+        .left-form {
+            max-width: 100%;
+            min-width: unset;
+            border-right: none;
+            border-bottom: 1px solid #fce58d;
+        }
+
+        }
+        @@media (max-width: 700px) {
+            .page-grid
+
+        {
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr 1fr 1fr 1fr;
+            min-height: 280px;
+        }
+
+        }
+    </style>
+</head>
+<body>
+    <div class="idt-header">
+        <div class="header-left-content">
+            <!-- Left side icons or extras, optional -->
+            <div class="header-icons">
+                <!-- put left side icons here if any -->
+            </div>
+            <div class="header-extra">Your Extra Item</div>
+        </div>
+
+        <div class="header-title">HOME</div>
+
+        <!-- Right side buttons -->
+        <div class="header-right-buttons">
+            <button type="button" class="header-icon-btn" title="Headset" onclick="onHeadsetClick()">
+                <img src="~/images/headset.png" alt="Headset" />
+            </button>
+            <button type="button" class="header-icon-btn" title="Arrow" onclick="onArrowClick()">
+                <img src="~/images/arrow.png" alt="Arrow" />
+            </button>
+            <button type="button" class="header-icon-btn" title="Power" onclick="onPowerClick()">
+                <img src="~/images/power.jpg" alt="Power" />
+            </button>
+        </div>
+    </div>
+
+
+    <div class="main-wrap">
+        <!-- Left form panel -->
+        <div class="left-form">
+            <img class="idt-logo" src="~/images/idt-logo.png" alt="IDT Logo" />
+            <div class="form-label">Lot No:</div>
+            <input class="idt-input" type="text" name="LotNo" />
+            <div class="form-label">ID:</div>
+            <input class="idt-input" type="text" name="ID" />
+            <div class="form-label">Size:</div>
+            <input class="idt-input" type="text" name="Size" />
+            <div class="form-label">Remarks:</div>
+            <textarea class="idt-remarks" name="Remarks"></textarea>
+            <div class="autofocus-wrap">
+                <input type="range" min="0" max="100" step="1" />
+                <input class="autofocus-input" type="text" value="000" />
+                <button class="autofocus-btn">Auto Focus</button>
+            </div>
+        </div>
+        <!-- Center workspace grid -->
+        <div class="main-wrap" style="display: flex; height: 100%;">
+            <div class="middle-panel">
+                <video id="video" autoplay playsinline></video>
+            </div>
+
+            <style>
+                .middle-panel {
+                    width: 70%;
+                    border: 2px solid #f5c518;
+                    height: 600px;
+                    margin: 0 10px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    overflow: hidden;
+                }
+
+                    .middle-panel video {
+                        width: 100%;
+                        height: 100%; /* Set height to 100% to avoid zooming */
+                        object-fit: cover; /* This will fill the container maintaining aspect ratio */
+                    }
+
+            </style>
+
+            <script>
+                navigator.mediaDevices.getUserMedia({ video: true })
+                  .then(function (stream) {
+                    document.getElementById('video').srcObject = stream;
+                  })
+                  .catch(function (err) {
+                    console.error("Error accessing camera: ", err);
+                  });
+            </script>
+
+
+
+            <!-- Right panel -->
+            <div class="right-panel">
+                <h2>Right Panel</h2>
+                <p>This is the right panel content area.</p>
+            </div>
+        </div>
+
+    </div>
+    <!-- Footer menu bar -->
+    <footer class="idt-footer-container">
+        <div class="idt-footer-menu">
+            <button class="menu-btn">
+                <span class="menu-icon">📷</span>
+                Scan
+            </button>
+            <button class="menu-btn">
+                <span class="menu-icon">🏠</span>
+                Home
+            </button>
+            <button class="menu-btn">
+                <span class="menu-icon">🔄</span>
+                Compare
+            </button>
+            <button class="menu-btn">
+                <span class="menu-icon">📊</span>
+                Result
+            </button>
+            <button class="menu-btn">
+                <span class="menu-icon">🕓</span>
+                History
+            </button>
+            <button class="menu-btn">
+                <span class="menu-icon">📄</span>
+                Certificate
+            </button>
+            <button class="menu-btn">
+                <span class="menu-icon">❓</span>
+                Help
+            </button>
+        </div>
+        <div class="idt-footer-info">
+            <div class="footer-left">IDT Gemological Laboratories Worldwide</div>
+            <div class="footer-separator"></div>
+            <div class="footer-right">www.idtworldwide.com</div>
+        </div>
+
+    </footer>
+
+   
+</body>
+</html>
