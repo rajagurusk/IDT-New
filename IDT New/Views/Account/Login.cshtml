@@ -21,26 +21,39 @@
 
         .left-panel {
             width: 50%;
-            background: linear-gradient(135deg, #fcc005 0%, #ecc204 60%, #fffde4 100%);
+            height: 100vh; /* Full viewport height */
+            position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            position: relative;
+            justify-content: flex-start;
+            overflow: hidden;
+            background: linear-gradient(135deg, #fcc005 0%, #ecc204 60%, #fffde4 100%), url('/images/diamond.jpg') no-repeat center center;
+            background-size: cover, contain; /* Gradient covers all; image is contained */
         }
+
 
         .left-logo {
             position: absolute;
-            top: 40px;
+            top: 5px;
             left: 50%;
             transform: translateX(-50%);
-            width: 170px;
+            width: 450px;
+            z-index: 2;
         }
 
-        .diamond-img {
-            width: 75%;
-            max-width: 440px;
-        }
+        /* .diamond-img {
+            margin-top: 0;
+            margin-bottom: 0;
+            width: 100%;
+            height: 3000%; 
+            max-height: 300vh; 
+            object-fit: contain; 
+            z-index: 1;
+        } */
+
+
+
 
         .right-panel {
             width: 50%;
@@ -53,6 +66,7 @@
         .login-box {
             width: 100%;
             max-width: 420px;
+            min-height: 500px; /* Adjust the height as needed */
             padding: 45px 35px;
             background: #fff;
             border-radius: 18px;
@@ -61,7 +75,7 @@
         }
 
         .login-logo-badge {
-            width: 80px;
+            width: 300px;
             margin-bottom: 15px;
         }
 
@@ -136,7 +150,7 @@
         <!-- Left Side: Logo & Diamond -->
         <div class="left-panel">
             <img class="left-logo" src="~/images/idt-logo.png" alt="IDT Logo" />
-            <img class="diamond-img" src="~/images/diamond.jpg" alt="Diamond" />
+            <img class="diamond-img" src="~/images/diamond.jpeg" alt="Diamond" />
         </div>
         <!-- Right Side: Login Form -->
         <div class="right-panel">
@@ -147,8 +161,8 @@
                     Welcome back! Please enter your details
                 </div>
                 <form method="post" asp-action="Login">
-                    <input class="input-field" type="text" name="UserID" placeholder="UserID:" required />
-                    <input class="input-field" type="password" name="Password" placeholder="Password:" required />
+                    <input class="input-field" type="text" name="UserID" placeholder="UserID" required />
+                    <input class="input-field" type="password" name="Password" placeholder="Password" required />
                     <button type="submit" class="login-btn">Log In</button>
                 </form>
             </div>
