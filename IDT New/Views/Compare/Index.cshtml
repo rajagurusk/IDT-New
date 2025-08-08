@@ -1,0 +1,526 @@
+﻿@{
+    ViewData["Title"] = "Compare";
+    Layout = null; // Remove if you want to use your shared layout
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>@ViewData["Title"]</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #fff;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .idt-header {
+            width: 100%;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 0 24px;
+            border-bottom: 1px solid #ede9d2;
+            background: #fff;
+            box-sizing: border-box;
+        }
+
+        .header-left-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2.2rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #222;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        .header-right-buttons {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-left: auto;
+            background-color: transparent;
+            border: none;
+        }
+
+        .header-icon-btn {
+            border: none;
+            background-color: transparent;
+            outline: none;
+            box-shadow: none;
+        }
+
+        .main-wrap {
+            display: flex;
+            flex-direction: row;
+            flex-grow: 1;
+            min-height: 0;
+        }
+
+        /* Left compare panel */
+        .compare-left-panel {
+            background: #fffde7;
+            border-right: 1px solid #fce58d;
+            min-width: 270px;
+            max-width: 290px;
+            padding: 40px 24px 12px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .compare-logo {
+            width: 120px;
+            display: block;
+            margin: 0 auto 36px auto;
+        }
+
+        .compare-label {
+            font-size: 1.12rem;
+            font-weight: 500;
+            color: #6a6237;
+            margin: 10px 0 5px 2px;
+        }
+
+        .compare-input {
+            width: 92%;
+            padding: 8px 14px;
+            margin-bottom: 13px;
+            font-size: 1rem;
+            border: 1.5px solid #ecc204;
+            border-radius: 7px;
+            background: #fafafb;
+            box-sizing: border-box;
+        }
+
+        .compare-row {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .compare-btn-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 17px;
+            width: 100%;
+        }
+
+            .compare-btn-group button {
+                width: 36px;
+                height: 32px;
+                font-size: 1.7rem;
+                border: none;
+                margin: 0 6px;
+                border-radius: 7px;
+                background: #fcc005;
+                cursor: pointer;
+            }
+
+            .compare-btn-group span {
+                font-size: 1.15rem;
+                flex: 1;
+                text-align: center;
+                margin: 0 6px;
+            }
+
+        .compare-action-btn {
+            width: 90%;
+            border: 1.5px solid #ecc204;
+            border-radius: 7px;
+            padding: 10px 0;
+            background: #fff;
+            font-weight: 600;
+            color: #222;
+            margin-bottom: 10px;
+            cursor: pointer;
+            font-size: 1.04rem;
+            transition: background 0.13s;
+        }
+
+            .compare-action-btn:hover {
+                background: #faeeb8;
+            }
+
+        /* Container that centers and limits overall width */
+        .center-content {
+            flex-grow: 1;
+            padding: 26px 18px 10px 18px;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            justify-content: center; 
+            align-items: center; 
+            width: 100vw; 
+            height: 100vh; 
+            box-sizing: border-box;
+        }
+
+        .compare-center-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            width: 100%;
+            height: 100%;
+        }
+
+        .compare-page-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 columns */
+            grid-template-rows: repeat(2, 1fr); /* 2 rows */
+            gap: 10px; /* space between cells */
+            width: 800px;
+            height: 700px;
+            max-width: 60vw;
+            max-height: 90vh;
+            border: 2px solid #fac600;
+            border-radius: 0px;
+            background: #fcf9ed;
+            box-sizing: border-box;
+            margin-left: 10px;
+        }
+
+
+
+        .compare-grid-cell {
+            position: relative; /* enable absolute positioning inside */
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            padding: 0;
+            background: #000;
+        }
+
+            .compare-grid-cell video {
+                width: 85%;
+                height: 85%;
+                object-fit: cover;
+                display: block;
+                background: #000;
+                border-radius: 7px;
+                border: none;
+            }
+
+        .video-label {
+            position: absolute;
+            top: 8px; /* spacing from top */
+            left: 8px; /* spacing from left */
+            padding: 4px 8px;
+            background-color: rgba(0, 0, 0, 0.6); /* semi-transparent black background */
+            color: #fff;
+            font-size: 0.9rem;
+            border-radius: 4px;
+            user-select: none;
+            pointer-events: none; /* so it doesn’t block interactions with the video */
+        }
+
+
+        .right-panel {
+            flex: 0 0 400px; /* Fix width to 200px */
+            background-color: #fafbfe;
+            padding: 30px;
+            border-left: 1px solid #f9e7aa;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-width: unset; /* Remove min-width if necessary */
+            box-sizing: border-box; /* Include padding in width */
+        }
+
+
+
+        /* Footer */
+        .idt-footer-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fffde4;
+            border-top: 1.5px solid #faeeb8;
+            box-shadow: 0 -2px 16px 0 #f1e27c33;
+            user-select: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .idt-footer-menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 0 6px 0;
+            width: 100%;
+        }
+
+        .menu-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: none;
+            border: none;
+            margin: 0 6px;
+            padding: 10px 10px 4px 10px;
+            color: black;
+            font-size: 1.01rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.18s;
+            border-radius: 10px;
+            text-decoration: none;
+        }
+
+            .menu-btn:hover {
+                color: #333333;
+                background: #f0f0f0;
+            }
+
+        .menu-icon {
+            font-size: 1.46rem;
+            margin-bottom: 2px;
+            display: block;
+            color: black;
+        }
+
+        .idt-footer-info {
+            width: 100%;
+            background: #fcc005;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 20px;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        .footer-left, .footer-right {
+            color: #222;
+            font-weight: 600;
+            font-size: 1.1rem;
+            white-space: nowrap;
+        }
+
+        .footer-separator {
+            width: 1px;
+            height: 24px;
+            background: #222;
+            margin: 0 15px;
+        }
+
+        @@media (max-width: 900px) {
+            .main-wrap {
+                flex-direction: column;
+            }
+
+            .compare-left-panel {
+                max-width: 100%;
+                min-width: unset;
+                border-right: none;
+                border-bottom: 1px solid #fce58d;
+                flex-direction: row;
+                flex-wrap: wrap;
+                align-items: flex-start;
+            }
+
+           
+
+
+            .compare-center-content {
+                width: 100%;
+                padding: 14px 0 8px 0;
+            }
+
+            .compare-page-grid {
+                min-height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="idt-header">
+        <div class="header-left-content">
+            <img src="~/images/idt-logo.png" alt="IDT Logo" style="height: 46px; margin-right: 12px;" />
+        </div>
+        <div class="header-title">COMPARE</div>
+        <div class="header-right-buttons">
+            <button type="button" class="header-icon-btn" title="Help">
+                <img src="images/headset.png" alt="Headset" width="32" height="32" />
+            </button>
+            <button type="button" class="header-icon-btn" title="Back">
+                <img src="images/arrow.png" alt="Arrow" width="32" height="32" />
+            </button>
+            <button type="button" class="header-icon-btn" title="Power">
+                <img src="images/power.png" alt="Power" width="32" height="32" />
+            </button>
+        </div>
+    </div>
+
+    <div class="main-wrap">
+        <!-- Left compare controls -->
+        <div class="compare-left-panel">
+            <img class="compare-logo" src="~/images/idt-logo.png" alt="IDT Logo" />
+            <div class="compare-label">HPHT</div>
+            <input class="compare-input" type="text" />
+            <div class="compare-label">CVD</div>
+            <input class="compare-input" type="text" />
+
+            <div class="compare-btn-group">
+                <button>-</button>
+                <span>0</span>
+                <button>+</button>
+            </div>
+            <button class="compare-action-btn">Super Image</button>
+            <button class="compare-action-btn">Simulants</button>
+        </div>
+        <!-- Center comparison grid -->
+        <div class="compare-center-content" style="flex-grow:1; display:flex; justify-content:center; align-items:center; padding: 0 10px;">
+            <div class="compare-page-grid">
+                <div class="compare-grid-cell">
+    <video autoplay playsinline muted></video>
+    <div class="video-label">Result</div>
+</div>
+<div class="compare-grid-cell">
+    <video autoplay playsinline muted></video>
+    <div class="video-label">Long Fluorescence</div>
+</div>
+<div class="compare-grid-cell">
+    <video autoplay playsinline muted></video>
+    <div class="video-label">Short Fluorescence</div>
+</div>
+<div class="compare-grid-cell">
+    <video autoplay playsinline muted></video>
+    <div class="video-label">Phosphorescence</div>
+</div>
+
+            </div>
+        </div>
+     @*    <style>
+        .compare-page-grid {
+        width: 2000%;              /* same as middle-panel width */
+        height: 1000%;           /* same as middle-panel height */
+        border: 2px solid #fac600; /* use your own border color */
+        border-radius: 14px;
+        margin: 0 10px;          /* same margin as middle-panel */
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* 2 columns, same as before */
+        grid-template-rows: 1fr 1fr;    /* 2 rows */
+        gap: 4px;
+        background: #fcf9ed;
+        
+     overflow: hidden;
+        }
+
+        .compare-grid-cell {
+        background: #000;
+        position: relative;
+        overflow: hidden;
+        border-radius: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+        .compare-grid-cell video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        border: none;
+        background: #000;
+        }
+        </style> *@
+
+        <script>
+            navigator.mediaDevices.getUserMedia({ video: true })
+              .then(function (stream) {
+                const videos = document.querySelectorAll('.compare-grid-cell video');
+                videos.forEach(video => {
+                  video.srcObject = stream;
+                });
+              })
+              .catch(function (err) {
+                console.error("Error accessing camera: ", err);
+              });
+        </script>
+        <!-- Right panel -->
+        <div class="right-panel">
+            <h2>Right Panel</h2>
+            <p>This is the right panel content area.</p>
+        </div>
+    </div>
+            
+       
+
+    </div>
+
+    <footer class="idt-footer-container">
+        <div class="idt-footer-menu">
+            <a class="menu-btn" href="/Compare">
+                <span class="menu-icon">
+                    <img src="~/images/scan.png" alt="Scan" width="32" height="32">
+                </span>
+                Scan
+            </a>
+            <a class="menu-btn" href="/Home">
+                <span class="menu-icon">
+                    <img src="~/images/home.png" alt="Home" width="32" height="32">
+                </span>
+                Home
+            </a>
+            <a class="menu-btn" href="/Compare">
+                <span class="menu-icon">
+                    <img src="~/images/compare.png" alt="Compare" width="32" height="32">
+                </span>
+                Compare
+            </a>
+            <a class="menu-btn" href="/Result">
+                <span class="menu-icon">
+                    <img src="~/images/result.png" alt="Result" width="32" height="32">
+                </span>
+                Result
+            </a>
+            <a class="menu-btn" href="/History">
+                <span class="menu-icon">
+                    <img src="~/images/history.png" alt="History" width="32" height="32">
+                </span>
+                History
+            </a>
+            <a class="menu-btn" href="/Certificate">
+                <span class="menu-icon">
+                    <img src="~/images/certificate.png" alt="Certificate" width="32" height="32">
+                </span>
+                Certificate
+            </a>
+        </div>
+        <div class="idt-footer-info">
+            <div class="footer-left">IDT Gemological Laboratories Worldwide</div>
+            <div class="footer-separator"></div>
+            <div class="footer-right">www.idtworldwide.com</div>
+        </div>
+    </footer>
+</body>
+</html>
