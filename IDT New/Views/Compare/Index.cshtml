@@ -1,16 +1,16 @@
 ﻿@{
-    ViewData["Title"] = "Compare";
-    Layout = null; // Remove if you want to use your shared layout
+    var images = ViewData["CapturedImages"] as List<string> ?? new List<string>();
+    string[] labels = new[] { "Result", "Long Fluorescence", "Short Fluorescence", "Phosphorescence" };
 }
 
-<!DOCTYPE html>
+<DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <title>@ViewData["Title"]</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-        html, body {
+        html,body {
             height: 100%;
             margin: 0;
             font-family: 'Segoe UI', Arial, sans-serif;
@@ -74,6 +74,8 @@
             flex-direction: row;
             flex-grow: 1;
             min-height: 0;
+            justify-content: center; /* center the children */
+            align-items: stretch;
         }
 
         /* Left compare panel */
@@ -162,203 +164,156 @@
                 background: #faeeb8;
             }
 
-        /* Container that centers and limits overall width */
-        .center-content {
-            flex-grow: 1;
-            padding: 26px 18px 10px 18px;
-            display: flex;
-            flex-direction: column;
-            min-width: 0;
-            justify-content: center; 
-            align-items: center; 
-            width: 100vw; 
-            height: 100vh; 
-            box-sizing: border-box;
-        }
-
         .compare-center-content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
             flex-grow: 1;
-            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             height: 100%;
+            padding: 0 18px;
         }
 
         .compare-page-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* 2 columns */
-            grid-template-rows: repeat(2, 1fr); /* 2 rows */
-            gap: 10px; /* space between cells */
-            width: 800px;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 16px; /* More space between cells */
+            width: 800px; /* Adjusted for squareness */
             height: 700px;
-            max-width: 60vw;
-            max-height: 90vh;
+            max-width:60vw;
+            max-height:90vh;
             border: 2px solid #fac600;
-            border-radius: 0px;
+            border-radius: 14px;
             background: #fcf9ed;
             box-sizing: border-box;
             margin-left: 10px;
         }
 
-
-
         .compare-grid-cell {
-            position: relative; /* enable absolute positioning inside */
-            box-sizing: border-box;
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: none;
-            padding: 0;
             background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(184, 163, 15, 0.08);
         }
 
-            .compare-grid-cell video {
-                width: 85%;
-                height: 85%;
+            .compare-grid-cell img {
+                width: 96%;
+                height: 96%;
                 object-fit: cover;
-                display: block;
-                background: #000;
-                border-radius: 7px;
-                border: none;
+                border-radius: 10px;
+                box-shadow: 0 0 3px #000a;
             }
 
         .video-label {
             position: absolute;
-            top: 8px; /* spacing from top */
-            left: 8px; /* spacing from left */
-            padding: 4px 8px;
-            background-color: rgba(0, 0, 0, 0.6); /* semi-transparent black background */
-            color: #fff;
-            font-size: 0.9rem;
-            border-radius: 4px;
+            top: 10px;
+            left: 12px;
+            padding: 5px 16px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #ffe46b;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 5px;
+            letter-spacing: 1px;
             user-select: none;
-            pointer-events: none; /* so it doesn’t block interactions with the video */
+            pointer-events: none;
         }
 
-
-        .right-panel {
-            flex: 0 0 400px; /* Fix width to 200px */
-            background-color: #fafbfe;
-            padding: 30px;
-            border-left: 1px solid #f9e7aa;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-width: unset; /* Remove min-width if necessary */
-            box-sizing: border-box; /* Include padding in width */
-        }
-
-
-
-        /* Footer */
-        .idt-footer-container {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: #fffde4;
-            border-top: 1.5px solid #faeeb8;
-            box-shadow: 0 -2px 16px 0 #f1e27c33;
-            user-select: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .idt-footer-menu {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 0 0 6px 0;
-            width: 100%;
-        }
-
-        .menu-btn {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: none;
-            border: none;
-            margin: 0 6px;
-            padding: 10px 10px 4px 10px;
-            color: black;
-            font-size: 1.01rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: color 0.18s;
-            border-radius: 10px;
-            text-decoration: none;
-        }
-
-            .menu-btn:hover {
-                color: #333333;
-                background: #f0f0f0;
-            }
-
-        .menu-icon {
-            font-size: 1.46rem;
-            margin-bottom: 2px;
-            display: block;
-            color: black;
-        }
-
-        .idt-footer-info {
-            width: 100%;
-            background: #fcc005;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 8px 20px;
-            box-sizing: border-box;
-            user-select: none;
-        }
-
-        .footer-left, .footer-right {
-            color: #222;
-            font-weight: 600;
-            font-size: 1.1rem;
-            white-space: nowrap;
-        }
-
-        .footer-separator {
-            width: 1px;
-            height: 24px;
-            background: #222;
-            margin: 0 15px;
-        }
-
-        @@media (max-width: 900px) {
-            .main-wrap {
+        /* Right panel */
+            .right-panel {
+                flex: 0 0 300px; /* Fix width to 200px */
+                background-color: #fafbfe;
+                padding: 10px;
+                border-left: 1px solid #f9e7aa;
+                display: flex;
                 flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                min-width: unset; /* Remove min-width if necessary */
+                box-sizing: border-box; /* Include padding in width */
             }
 
-            .compare-left-panel {
-                max-width: 100%;
-                min-width: unset;
-                border-right: none;
-                border-bottom: 1px solid #fce58d;
-                flex-direction: row;
-                flex-wrap: wrap;
-                align-items: flex-start;
+            .idt-footer-container {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: #fffde4;
+                border-top: 1.5px solid #faeeb8;
+                box-shadow: 0 -2px 16px 0 #f1e27c33;
+                user-select: none;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                z-index: 1000;
             }
 
-           
-
-
-            .compare-center-content {
+            .idt-footer-menu {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0 0 6px 0;
                 width: 100%;
-                padding: 14px 0 8px 0;
             }
 
-            .compare-page-grid {
-                min-height: 300px;
+            .menu-btn {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background: none;
+                border: none;
+                margin: 0 6px;
+                padding: 10px 10px 4px 10px;
+                color: black;
+                font-size: 1.01rem;
+                font-weight: 600;
+                cursor: pointer;
+                transition: color 0.18s;
+                border-radius: 10px;
             }
-        }
-    </style>
+
+                .menu-btn:hover {
+                    color: #333333;
+                    background: #f0f0f0;
+                }
+
+            .menu-icon {
+                font-size: 1.46rem;
+                margin-bottom: 2px;
+                display: block;
+                color: black;
+            }
+
+            .idt-footer-info {
+                width: 100%;
+                background: #fcc005;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 8px 20px;
+                box-sizing: border-box;
+                user-select: none;
+            }
+
+            .footer-left,
+            .footer-right {
+                color: #222;
+                font-weight: 600;
+                font-size: 1.1rem;
+                white-space: nowrap;
+            }
+
+            .footer-separator {
+                width: 1px;
+                height: 24px;
+                background: #222;
+                margin: 0 15px;
+            }
+        </style>
 </head>
 <body>
     <div class="idt-header">
@@ -394,124 +349,71 @@
                 <button>+</button>
             </div>
             <button class="compare-action-btn">Super Image</button>
-            <button class="compare-action-btn">Simulants</button>
+            <button class="compare-action-btn">Super Image</button>
         </div>
-        <!-- Center comparison grid -->
-        <div class="compare-center-content" style="flex-grow:1; display:flex; justify-content:center; align-items:center; padding: 0 10px;">
-            <div class="compare-page-grid">
-                <div class="compare-grid-cell">
-    <video autoplay playsinline muted></video>
-    <div class="video-label">Result</div>
-</div>
-<div class="compare-grid-cell">
-    <video autoplay playsinline muted></video>
-    <div class="video-label">Long Fluorescence</div>
-</div>
-<div class="compare-grid-cell">
-    <video autoplay playsinline muted></video>
-    <div class="video-label">Short Fluorescence</div>
-</div>
-<div class="compare-grid-cell">
-    <video autoplay playsinline muted></video>
-    <div class="video-label">Phosphorescence</div>
-</div>
 
+        <!-- Center comparison grid -->
+        <div class="compare-center-content">
+            <div class="compare-page-grid">
+                @for (int i = 0; i < 4; i++)
+                {
+                    <div class="compare-grid-cell">
+                        @if (images.Count > i)
+                        {
+                            <img src="@images[i]" alt="@labels[i]" />
+                        }
+                        else
+                        {
+                            <div style="color: white;">No Image</div>
+                        }
+                        <div class="video-label">@labels[i]</div>
+                    </div>
+                }
             </div>
         </div>
-     @*    <style>
-        .compare-page-grid {
-        width: 2000%;              /* same as middle-panel width */
-        height: 1000%;           /* same as middle-panel height */
-        border: 2px solid #fac600; /* use your own border color */
-        border-radius: 14px;
-        margin: 0 10px;          /* same margin as middle-panel */
-        display: grid;
-        grid-template-columns: 1fr 1fr; /* 2 columns, same as before */
-        grid-template-rows: 1fr 1fr;    /* 2 rows */
-        gap: 4px;
-        background: #fcf9ed;
-        
-     overflow: hidden;
-        }
 
-        .compare-grid-cell {
-        background: #000;
-        position: relative;
-        overflow: hidden;
-        border-radius: 4px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        }
-
-        .compare-grid-cell video {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-        border: none;
-        background: #000;
-        }
-        </style> *@
-
-        <script>
-            navigator.mediaDevices.getUserMedia({ video: true })
-              .then(function (stream) {
-                const videos = document.querySelectorAll('.compare-grid-cell video');
-                videos.forEach(video => {
-                  video.srcObject = stream;
-                });
-              })
-              .catch(function (err) {
-                console.error("Error accessing camera: ", err);
-              });
-        </script>
         <!-- Right panel -->
         <div class="right-panel">
             <h2>Right Panel</h2>
             <p>This is the right panel content area.</p>
         </div>
     </div>
-            
-       
-
-    </div>
 
     <footer class="idt-footer-container">
         <div class="idt-footer-menu">
             <a class="menu-btn" href="/Compare">
                 <span class="menu-icon">
-                    <img src="~/images/scan.png" alt="Scan" width="32" height="32">
+                    <img src="~/images/scan.png" alt="Scan" width="32" height="32" />
                 </span>
                 Scan
             </a>
             <a class="menu-btn" href="/Home">
                 <span class="menu-icon">
-                    <img src="~/images/home.png" alt="Home" width="32" height="32">
+                    <img src="~/images/home.png" alt="Home" width="32" height="32" />
                 </span>
                 Home
             </a>
             <a class="menu-btn" href="/Compare">
                 <span class="menu-icon">
-                    <img src="~/images/compare.png" alt="Compare" width="32" height="32">
+                    <img src="~/images/compare.png" alt="Compare" width="32" height="32" />
                 </span>
                 Compare
             </a>
             <a class="menu-btn" href="/Result">
                 <span class="menu-icon">
-                    <img src="~/images/result.png" alt="Result" width="32" height="32">
+                    <img src="~/images/result.png" alt="Result" width="32" height="32" />
                 </span>
                 Result
             </a>
             <a class="menu-btn" href="/History">
                 <span class="menu-icon">
-                    <img src="~/images/history.png" alt="History" width="32" height="32">
+                    <img src="~/images/history.png" alt="History" width="32" height="32" />
                 </span>
                 History
             </a>
             <a class="menu-btn" href="/Certificate">
                 <span class="menu-icon">
-                    <img src="~/images/certificate.png" alt="Certificate" width="32" height="32">
+                    <img src="~/images/certificate.png" alt="Certificate" width="32" height="32" />
                 </span>
                 Certificate
             </a>
