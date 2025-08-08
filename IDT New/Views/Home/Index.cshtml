@@ -58,21 +58,19 @@
         .header-right-buttons {
             display: flex;
             align-items: center;
-            gap: 12px; /* smaller gap between buttons */
-            margin-left: auto; /* pushes container fully right */
+            gap: 12px;
+            margin-left: auto;
+            background-color: transparent; /* Remove background color */
+            border: none; /* Remove border if any */
         }
 
-        /* Smaller icon size */
-        .header-icon-btn img {
-            width: 20px;
-            height: 20px;
-            object-fit: contain;
-            display: block;
-            transition: opacity 0.2s ease;
-            border: none; /* Remove any borders */
-            outline: none; /* Also remove outline if any */
-            box-shadow: none; /* Remove any shadow that may look like a border */
+        .header-icon-btn {
+            border: none;
+            background-color: transparent;
+            outline: none;
+            box-shadow: none;
         }
+
 
 
 
@@ -311,17 +309,21 @@
         <div class="header-title">HOME</div>
 
         <!-- Right side buttons -->
+
         <div class="header-right-buttons">
-            <button type="button" class="header-icon-btn" title="Headset" onclick="onHeadsetClick()">
-                <img src="~/images/headset.png" alt="Headset" />
+            <button type="button" class="header-icon-btn" title="Help" onclick="onHeadsetClick()">
+                <img src="images/headset.png" alt="Headset" width="32" height="32" />
             </button>
-            <button type="button" class="header-icon-btn" title="Arrow" onclick="onArrowClick()">
-                <img src="~/images/arrow.png" alt="Arrow" />
+            <button type="button" class="header-icon-btn" title="Back" onclick="onArrowClick()">
+                <img src="images/arrow.png" alt="Arrow" width="32" height="32" />
             </button>
             <button type="button" class="header-icon-btn" title="Power" onclick="onPowerClick()">
-                <img src="~/images/power.jpg" alt="Power" />
+                <img src="images/power.png" alt="Power" width="32" height="32" />
             </button>
         </div>
+
+
+
     </div>
 
 
@@ -393,34 +395,43 @@
     <footer class="idt-footer-container">
         <div class="idt-footer-menu">
             <button class="menu-btn">
-                <span class="menu-icon">📷</span>
+                <span class="menu-icon">
+                    <img src="~/images/scan.png" alt="Scan" width="32" height="32">
+                </span>
                 Scan
             </button>
             <button class="menu-btn">
-                <span class="menu-icon">🏠</span>
+                <span class="menu-icon">
+                    <img src="~/images/home.png" alt="Home" width="32" height="32">
+                </span>
                 Home
             </button>
             <button class="menu-btn">
-                <span class="menu-icon">🔄</span>
+                <span class="menu-icon">
+                    <img src="~/images/compare.png" alt="Compare" width="32" height="32">
+                </span>
                 Compare
             </button>
             <button class="menu-btn">
-                <span class="menu-icon">📊</span>
+                <span class="menu-icon">
+                    <img src="~/images/result.png" alt="Result" width="32" height="32">
+                </span>
                 Result
             </button>
             <button class="menu-btn">
-                <span class="menu-icon">🕓</span>
+                <span class="menu-icon">
+                    <img src="~/images/history.png" alt="History" width="32" height="32">
+                </span>
                 History
             </button>
             <button class="menu-btn">
-                <span class="menu-icon">📄</span>
+                <span class="menu-icon">
+                    <img src="~/images/certificate.png" alt="Certificate" width="32" height="32">
+                </span>
                 Certificate
             </button>
-            <button class="menu-btn">
-                <span class="menu-icon">❓</span>
-                Help
-            </button>
         </div>
+
         <div class="idt-footer-info">
             <div class="footer-left">IDT Gemological Laboratories Worldwide</div>
             <div class="footer-separator"></div>
