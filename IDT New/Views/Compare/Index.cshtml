@@ -3,227 +3,227 @@
     string[] labels = new[] { "Result", "Long Fluorescence", "Short Fluorescence", "Phosphorescence" };
 }
 
-<DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <title>@ViewData["Title"]</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <style>
-        html,body {
-            height: 100%;
-            margin: 0;
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: #fff;
-        }
+        <style>
+            html, body {
+                height: 100%;
+                margin: 0;
+                font-family: 'Segoe UI', Arial, sans-serif;
+                background: #fff;
+            }
 
-        body {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+            body {
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
 
-        .idt-header {
-            width: 100%;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            position: relative;
-            padding: 0 24px;
-            border-bottom: 1px solid #ede9d2;
-            background: #fff;
-            box-sizing: border-box;
-        }
+            .idt-header {
+                width: 100%;
+                height: 60px;
+                display: flex;
+                align-items: center;
+                position: relative;
+                padding: 0 24px;
+                border-bottom: 1px solid #ede9d2;
+                background: #fff;
+                box-sizing: border-box;
+            }
 
-        .header-left-content {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
+            .header-left-content {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+            }
 
-        .header-title {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 2.2rem;
-            font-weight: bold;
-            letter-spacing: 2px;
-            color: #222;
-            white-space: nowrap;
-            pointer-events: none;
-        }
+            .header-title {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                font-size: 2.2rem;
+                font-weight: bold;
+                letter-spacing: 2px;
+                color: #222;
+                white-space: nowrap;
+                pointer-events: none;
+            }
 
-        .header-right-buttons {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-left: auto;
-            background-color: transparent;
-            border: none;
-        }
-
-        .header-icon-btn {
-            border: none;
-            background-color: transparent;
-            outline: none;
-            box-shadow: none;
-        }
-
-        .main-wrap {
-            display: flex;
-            flex-direction: row;
-            flex-grow: 1;
-            min-height: 0;
-            justify-content: center; /* center the children */
-            align-items: stretch;
-        }
-
-        /* Left compare panel */
-        .compare-left-panel {
-            background: #fffde7;
-            border-right: 1px solid #fce58d;
-            min-width: 270px;
-            max-width: 290px;
-            padding: 40px 24px 12px 24px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .compare-logo {
-            width: 120px;
-            display: block;
-            margin: 0 auto 36px auto;
-        }
-
-        .compare-label {
-            font-size: 1.12rem;
-            font-weight: 500;
-            color: #6a6237;
-            margin: 10px 0 5px 2px;
-        }
-
-        .compare-input {
-            width: 92%;
-            padding: 8px 14px;
-            margin-bottom: 13px;
-            font-size: 1rem;
-            border: 1.5px solid #ecc204;
-            border-radius: 7px;
-            background: #fafafb;
-            box-sizing: border-box;
-        }
-
-        .compare-row {
-            display: flex;
-            align-items: center;
-            width: 100%;
-            margin-bottom: 15px;
-        }
-
-        .compare-btn-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 17px;
-            width: 100%;
-        }
-
-            .compare-btn-group button {
-                width: 36px;
-                height: 32px;
-                font-size: 1.7rem;
+            .header-right-buttons {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                margin-left: auto;
+                background-color: transparent;
                 border: none;
-                margin: 0 6px;
+            }
+
+            .header-icon-btn {
+                border: none;
+                background-color: transparent;
+                outline: none;
+                box-shadow: none;
+            }
+
+            .main-wrap {
+                display: flex;
+                flex-direction: row;
+                flex-grow: 1;
+                min-height: 0;
+                justify-content: center; /* center the children */
+                align-items: stretch;
+            }
+
+            /* Left compare panel */
+            .compare-left-panel {
+                background: #fffde7;
+                border-right: 1px solid #fce58d;
+                min-width: 270px;
+                max-width: 290px;
+                padding: 40px 24px 12px 24px;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .compare-logo {
+                width: 120px;
+                display: block;
+                margin: 0 auto 36px auto;
+            }
+
+            .compare-label {
+                font-size: 1.12rem;
+                font-weight: 500;
+                color: #6a6237;
+                margin: 10px 0 5px 2px;
+            }
+
+            .compare-input {
+                width: 92%;
+                padding: 8px 14px;
+                margin-bottom: 13px;
+                font-size: 1rem;
+                border: 1.5px solid #ecc204;
                 border-radius: 7px;
-                background: #fcc005;
+                background: #fafafb;
+                box-sizing: border-box;
+            }
+
+            .compare-row {
+                display: flex;
+                align-items: center;
+                width: 100%;
+                margin-bottom: 15px;
+            }
+
+            .compare-btn-group {
+                display: flex;
+                align-items: center;
+                margin-bottom: 17px;
+                width: 100%;
+            }
+
+                .compare-btn-group button {
+                    width: 36px;
+                    height: 32px;
+                    font-size: 1.7rem;
+                    border: none;
+                    margin: 0 6px;
+                    border-radius: 7px;
+                    background: #fcc005;
+                    cursor: pointer;
+                }
+
+                .compare-btn-group span {
+                    font-size: 1.15rem;
+                    flex: 1;
+                    text-align: center;
+                    margin: 0 6px;
+                }
+
+            .compare-action-btn {
+                width: 90%;
+                border: 1.5px solid #ecc204;
+                border-radius: 7px;
+                padding: 10px 0;
+                background: #fff;
+                font-weight: 600;
+                color: #222;
+                margin-bottom: 10px;
                 cursor: pointer;
+                font-size: 1.04rem;
+                transition: background 0.13s;
             }
 
-            .compare-btn-group span {
-                font-size: 1.15rem;
-                flex: 1;
-                text-align: center;
-                margin: 0 6px;
+                .compare-action-btn:hover {
+                    background: #faeeb8;
+                }
+
+            .compare-center-content {
+                flex-grow: 1;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+                padding: 0 18px;
             }
 
-        .compare-action-btn {
-            width: 90%;
-            border: 1.5px solid #ecc204;
-            border-radius: 7px;
-            padding: 10px 0;
-            background: #fff;
-            font-weight: 600;
-            color: #222;
-            margin-bottom: 10px;
-            cursor: pointer;
-            font-size: 1.04rem;
-            transition: background 0.13s;
-        }
-
-            .compare-action-btn:hover {
-                background: #faeeb8;
+            .compare-page-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(2, 1fr);
+                gap: 16px; /* More space between cells */
+                width: 800px; /* Adjusted for squareness */
+                height: 700px;
+                max-width: 60vw;
+                max-height: 90vh;
+                border: 2px solid #fac600;
+                border-radius: 14px;
+                background: #fcf9ed;
+                box-sizing: border-box;
+                margin-left: 10px;
             }
 
-        .compare-center-content {
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            padding: 0 18px;
-        }
-
-        .compare-page-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(2, 1fr);
-            gap: 16px; /* More space between cells */
-            width: 800px; /* Adjusted for squareness */
-            height: 700px;
-            max-width:60vw;
-            max-height:90vh;
-            border: 2px solid #fac600;
-            border-radius: 14px;
-            background: #fcf9ed;
-            box-sizing: border-box;
-            margin-left: 10px;
-        }
-
-        .compare-grid-cell {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #000;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(184, 163, 15, 0.08);
-        }
-
-            .compare-grid-cell img {
-                width: 96%;
-                height: 96%;
-                object-fit: cover;
-                border-radius: 10px;
-                box-shadow: 0 0 3px #000a;
+            .compare-grid-cell {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #000;
+                border-radius: 12px;
+                overflow: hidden;
+                box-shadow: 0 2px 10px rgba(184, 163, 15, 0.08);
             }
 
-        .video-label {
-            position: absolute;
-            top: 10px;
-            left: 12px;
-            padding: 5px 16px;
-            background: rgba(0, 0, 0, 0.6);
-            color: #ffe46b;
-            font-size: 1rem;
-            font-weight: 500;
-            border-radius: 5px;
-            letter-spacing: 1px;
-            user-select: none;
-            pointer-events: none;
-        }
+                .compare-grid-cell img {
+                    width: 96%;
+                    height: 96%;
+                    object-fit: cover;
+                    border-radius: 10px;
+                    box-shadow: 0 0 3px #000a;
+                }
 
-        /* Right panel */
+            .video-label {
+                position: absolute;
+                top: 10px;
+                left: 12px;
+                padding: 5px 16px;
+                background: rgba(0, 0, 0, 0.6);
+                color: #ffe46b;
+                font-size: 1rem;
+                font-weight: 500;
+                border-radius: 5px;
+                letter-spacing: 1px;
+                user-select: none;
+                pointer-events: none;
+            }
+
+            /* Right panel */
             .right-panel {
                 flex: 0 0 300px; /* Fix width to 200px */
                 background-color: #fafbfe;
@@ -236,6 +236,103 @@
                 min-width: unset; /* Remove min-width if necessary */
                 box-sizing: border-box; /* Include padding in width */
             }
+        /* Diamond chart box */
+        .diamond-chart-header {
+            display: flex;
+            align-items: center;
+            gap: 8px; /* spacing between title and button */
+            margin-bottom: 17px;
+        }
+
+        .diamond-helper-btn img {
+            display: block;
+        }
+
+        .diamond-chart-box {
+            margin-top: 10px;
+            width: 100%;
+            background: #f9f9ef;
+            border: 1.5px solid #facd02;
+            border-radius: 13px;
+            padding: 28px 24px 16px 24px;
+            box-shadow: 0 2px 8px rgba(252,197,2,0.2);
+        }
+
+        /* .diamond-chart-title {
+                    background: #faeeb8;
+                    color: #6a6237;
+                    font-weight: bold;
+                    font-size: 1.26rem;
+                    text-align: center;
+                    border-radius: 8px;
+                    padding: 5px 0 7px 0;
+                    /* remove margin-bottom as it's now on .diamond-chart-header */
+        /* } */ */
+        .diamond-chart-title {
+            background: #faeeb8;
+            color: #6a6237;
+            font-size: 1.26rem;
+            font-weight: 700;
+            border-radius: 8px;
+            padding: 5px 0 7px 0;
+            margin-bottom: 17px;
+            text-align: center;
+            gap: 8px; /* Space between title and button */
+        }
+
+        .diamond-chart-row {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 14px;
+            margin-bottom: 13px;
+        }
+
+        .diamond-chart-label {
+            width: 42px;
+            font-weight: 600;
+            color: #8a8063;
+            font-size: 1.1rem;
+        }
+
+        .chart-btn {
+            width: 32px;
+            height: 29px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: #f5b704;
+            border: none;
+            border-radius: 7px;
+            color: #444;
+            cursor: pointer;
+            user-select: none;
+            margin: 0 4px;
+            transition: background 0.15s;
+        }
+
+            .chart-btn:hover {
+                background: #f8d875;
+            }
+
+            .chart-btn:disabled {
+                opacity: 0.5;
+                cursor: default;
+            }
+
+            .chart-btn:focus {
+                outline: none;
+            }
+
+        .chart-value {
+            width: 24px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #333;
+            text-align: center;
+            user-select: none;
+            display: inline-block;
+        }
+
 
             .idt-footer-container {
                 position: fixed;
@@ -314,6 +411,7 @@
                 margin: 0 15px;
             }
         </style>
+
 </head>
 <body>
     <div class="idt-header">
@@ -371,12 +469,55 @@
                 }
             </div>
         </div>
+        <style>
+            .middle-panel {
+                width: 71%;
+                border: 2px solid #f5c518;
+                height: 725px;
+                margin: 0 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+            }
+
+                .middle-panel video {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+        </style>
 
         <!-- Right panel -->
         <div class="right-panel">
-            <h2>Right Panel</h2>
-            <p>This is the right panel content area.</p>
+            <div class="diamond-chart-header">
+                <div class="diamond-chart-title"><strong>Diamond Chart</strong></div>
+                <button class="diamond-helper-btn" onclick="showDiamondHelp()" title="Show Diamond Chart Info" style="background:none;border:none;cursor:pointer;">
+                    <img src="images/pop up icon.png" alt="Info" width="20" height="16" style="vertical-align:middle;" />
+                </button>
+            </div>
+
+
+            <div class="diamond-chart-row">
+                <span class="diamond-chart-label">LW:</span>
+                <button class="chart-btn" onclick="updateChart('LW', -1)">-</button>
+                <span id="lwVal" class="chart-value">0</span>
+                <button class="chart-btn" onclick="updateChart('LW', 1)">+</button>
+            </div>
+            <div class="diamond-chart-row">
+                <span class="diamond-chart-label">SW:</span>
+                <button class="chart-btn" onclick="updateChart('SW', -1)">-</button>
+                <span id="swVal" class="chart-value">0</span>
+                <button class="chart-btn" onclick="updateChart('SW', 1)">+</button>
+            </div>
+            <div class="diamond-chart-row">
+                <span class="diamond-chart-label">PH:</span>
+                <button class="chart-btn" onclick="updateChart('PH', -1)">-</button>
+                <span id="phVal" class="chart-value">0</span>
+                <button class="chart-btn" onclick="updateChart('PH', 1)">+</button>
+            </div>
         </div>
+    </div>
     </div>
 
     <footer class="idt-footer-container">

@@ -74,6 +74,26 @@
             text-align: center;
         }
 
+        
+
+        .bottom-links {
+            margin-top: auto; /* push to bottom */
+            display: flex;
+            justify-content: center;
+            gap: 30px; /* space between About Us & Contact */
+            padding-top: 20px;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+            .bottom-links span {
+                cursor: pointer;
+            }
+
+                .bottom-links span:hover {
+                    text-decoration: underline;
+                }
+
         .login-logo-badge {
             width: 300px;
             margin-bottom: 15px;
@@ -169,7 +189,11 @@
                 {
                     <div style="color:red;">@ViewBag.ErrorMessage</div>
                 }
-
+                <!-- New bottom section -->
+                <div class="bottom-links">
+                    <span>About Us</span>
+                    <span>Contact</span>
+                </div>
             </div>
         </div>
     </div>

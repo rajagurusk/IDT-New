@@ -28,21 +28,19 @@
             height: 60px; /* adjust if needed */
             display: flex;
             align-items: center;
-            position: relative; /* for absolute centering of title */
+            position: relative; /* for absolute centering */
             padding: 0 24px;
             border-bottom: 1px solid #ede9d2;
             background: #fff;
             box-sizing: border-box;
         }
 
-        /* Left content stays on left */
         .header-left-content {
             display: flex;
             align-items: center;
             gap: 20px;
         }
 
-        /* Center title absolutely centered */
         .header-title {
             position: absolute;
             left: 50%;
@@ -52,7 +50,7 @@
             letter-spacing: 2px;
             color: #222;
             white-space: nowrap;
-            pointer-events: none; /* so clicks go through if needed */
+            pointer-events: none;
         }
 
         .header-right-buttons {
@@ -80,10 +78,11 @@
 
         .left-form {
             background: #fffde7;
-            border-right: 1px solid #fce58d;
+            border-right: 1px solid #fce9a1;
             min-width: 320px;
             max-width: 320px;
             padding: 40px 24px;
+            box-sizing: border-box;
         }
 
         .idt-logo {
@@ -93,27 +92,27 @@
         }
 
         .form-label {
-            font-size: 1.1rem;
-            margin: 8px 0 5px 3px;
             color: #444;
+            font-size: 1rem;
+            margin: 10px 0 5px 3px;
         }
 
-        .idt-input,
-        .idt-remarks {
-            width: 300px;
+        .idt-input, .idt-remarks {
+            width: 100%;
+            max-width: 300px;
             padding: 9px 14px;
             margin-bottom: 15px;
             font-size: 1rem;
-            border: 1.5px solid #ecc204;
+            border: 1px solid #eccf64;
             border-radius: 7px;
             background: #fafafb;
             box-sizing: border-box;
         }
 
         .idt-remarks {
+            resize: vertical;
             min-height: 48px;
             max-height: 90px;
-            resize: vertical;
         }
 
         .autofocus-input {
@@ -127,147 +126,253 @@
             width: 140px;
         }
 
-        .center-content {
-            flex-grow: 1;
-            padding: 26px 18px 10px 18px;
-            display: flex;
-            flex-direction: column;
-            min-width: 0;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .page-grid {
-            width: 100%;
-            height: 100%;
-            min-height: 600px;
-            max-width: 1000px;
-        }
-
-        .grid-item {
-            width: 100%;
-            height: 600px;
-            background: #fff;
-            border: 1px solid #f9e7aa;
-            border-radius: 7px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        /* Middle panel styling (video) */
+        .middle-panel {
+            width: 71%;
+            border: 2px solid #f7b913;
+            margin: 0 10px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.5rem;
-            color: #666;
+            overflow: hidden;
+            height: calc(100vh - 60px - 90px); /* Adjust for header/footer height */
+            max-height: 725px;
         }
 
+            .middle-panel video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+        /* Right panel */
         .right-panel {
             flex: 0 0 400px;
-            background-color: #fafbfe;
+            background-color: #fafefe;
             padding: 30px;
-            border-left: 1px solid #f9e7aa;
+            border-left: 1px solid #f0e7b8;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
-            min-width: unset;
             box-sizing: border-box;
         }
 
-        /* Menu bar */
+        /* Diamond chart box */
+        .diamond-chart-header {
+            display: flex;
+            align-items: center;
+            gap: 8px; /* spacing between title and button */
+            margin-bottom: 17px;
+        }
+
+        .diamond-helper-btn img {
+            display: block;
+        }
+
+        .diamond-chart-box {
+            margin-top: 10px;
+            width: 100%;
+            background: #f9f9ef;
+            border: 1.5px solid #facd02;
+            border-radius: 13px;
+            padding: 28px 24px 16px 24px;
+            box-shadow: 0 2px 8px rgba(252,197,2,0.2);
+        }
+
+        /* .diamond-chart-title {
+            background: #faeeb8;
+            color: #6a6237;
+            font-weight: bold;
+            font-size: 1.26rem;
+            text-align: center;
+            border-radius: 8px;
+            padding: 5px 0 7px 0;
+            /* remove margin-bottom as it's now on .diamond-chart-header */
+        /* } */ */
+        .diamond-chart-title {
+            background: #faeeb8;
+            color: #6a6237;
+            font-size: 1.26rem;
+            font-weight: 700;
+            border-radius: 8px;
+            padding: 5px 0 7px 0;
+            margin-bottom: 17px;
+            text-align: center;
+            gap: 8px; /* Space between title and button */
+        }
+
+        .diamond-chart-row {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 14px;
+            margin-bottom: 13px;
+        }
+
+        .diamond-chart-label {
+            width: 42px;
+            font-weight: 600;
+            color: #8a8063;
+            font-size: 1.1rem;
+        }
+
+        .chart-btn {
+            width: 32px;
+            height: 29px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: #f5b704;
+            border: none;
+            border-radius: 7px;
+            color: #444;
+            cursor: pointer;
+            user-select: none;
+            margin: 0 4px;
+            transition: background 0.15s;
+        }
+
+            .chart-btn:hover {
+                background: #f8d875;
+            }
+
+            .chart-btn:disabled {
+                opacity: 0.5;
+                cursor: default;
+            }
+
+            .chart-btn:focus {
+                outline: none;
+            }
+
+        .chart-value {
+            width: 24px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #333;
+            text-align: center;
+            user-select: none;
+            display: inline-block;
+        }
+
+        /* Footer styles */
         .idt-footer-container {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background: #fffde4;
-            border-top: 1.5px solid #faeeb8;
-            box-shadow: 0 -2px 16px 0 #f1e27c33;
+            background: #fdeec2;
+            border-top: 1.5px solid #f0db26;
+            box-shadow: 0 -2px 16px rgba(240,219,38,0.2);
             user-select: none;
             display: flex;
             flex-direction: column;
             align-items: center;
             z-index: 1000;
+            font-size: 1rem;
         }
+
+            .idt-footer-container * {
+                user-select: none;
+            }
+
+            .idt-footer-container a,
+            .idt-footer-container button {
+                cursor: pointer;
+                background: transparent;
+                border: none;
+                padding: 10px 12px;
+                margin: 0 4px;
+                border-radius: 8px;
+                transition: background-color 0.25s ease;
+                font-weight: 600;
+                color: #222;
+                font-size: 1rem;
+            }
+
+                .idt-footer-container a:hover,
+                .idt-footer-container button:hover {
+                    background: #f8d863;
+                    color: #333;
+                }
 
         .idt-footer-menu {
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 0 0 6px 0;
             width: 100%;
-        }
-
-        .menu-btn {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: none;
-            border: none;
-            margin: 0 6px;
-            padding: 10px 10px 4px 10px;
-            color: black;
-            font-size: 1.01rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: color 0.18s;
-            border-radius: 10px;
-        }
-
-            .menu-btn:hover {
-                color: #333333;
-                background: #f0f0f0;
-            }
-
-        .menu-icon {
-            font-size: 1.46rem;
-            margin-bottom: 2px;
-            display: block;
-            color: black;
-        }
-
-        .idt-footer-info {
-            width: 100%;
-            background: #fcc005;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 8px 20px;
-            box-sizing: border-box;
-            user-select: none;
-        }
-
-        .footer-left,
-        .footer-right {
-            color: #222;
-            font-weight: 600;
-            font-size: 1.1rem;
-            white-space: nowrap;
+            padding: 6px 0;
         }
 
         .footer-separator {
             width: 1px;
             height: 24px;
-            background: #222;
+            background: #aaa247;
             margin: 0 15px;
         }
 
-        @@media (max-width: 880px) {
-            .main-wrap {
-                flex-direction: column;
-            }
+        .idt-footer-info {
+            background: #f4cb00;
+            padding: 10px 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #3b3a33;
+            font-weight: 700;
+        }
 
-            .left-form {
-                max-width: 100%;
-                min-width: unset;
-                border-right: none;
-                border-bottom: 1px solid #fce58d;
-            }
+        .footer-left, .footer-right {
+            white-space: nowrap;
+        }
+
+        /* Responsive adjustments */
+        @@media (max-width: 880px) {
+            .main-wrap
+
+        {
+            flex-direction: column;
+        }
+
+        .left-form,
+        .right-panel {
+            max-width: 100%;
+            min-width: auto;
+            padding: 20px;
+            border: none;
+        }
+
+        .middle-panel {
+            width: 100% !important;
+            max-height: 400px;
+            margin: 15px 0;
+        }
+
         }
 
         @@media (max-width: 700px) {
-            .page-grid {
-                grid-template-columns: 1fr;
-                grid-template-rows: 1fr 1fr 1fr 1fr;
-                min-height: 280px;
-            }
+            .diamond-chart-row
+
+        {
+            gap: 8px;
+        }
+
+        .diamond-chart-label {
+            width: 35px;
+            font-size: 0.95rem;
+        }
+
+        .chart-btn {
+            width: 28px;
+            height: 28px;
+            font-size: 1rem;
+        }
+
+        .chart-value {
+            width: 20px;
+            font-size: 0.9rem;
+        }
+
         }
     </style>
 </head>
@@ -292,7 +397,6 @@
     </div>
 
     <div class="main-wrap">
-        <!-- Left form panel -->
         <div class="left-form">
             <img class="idt-logo" src="~/images/idt-logo.png" alt="IDT Logo" />
             <div class="form-label">Lot No:</div>
@@ -310,83 +414,62 @@
             </div>
         </div>
 
-        <!-- Center workspace grid -->
-        <div class="main-wrap" style="display: flex; height: 100%;">
-            <div class="middle-panel">
-                <video id="video" autoplay playsinline muted></video>
-            </div>
-
-            <style>
-                .middle-panel {
-                    width: 70%;
-                    border: 2px solid #f5c518;
-                    height: 500px;
-                    margin: 0 10px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    overflow: hidden;
-                }
-
-                    .middle-panel video {
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                    }
-            </style>
-
-            <!-- Right panel -->
-            <div class="right-panel">
-                <h2>Right Panel</h2>
-                <p>This is the right panel content area.</p>
-            </div>
+        <div class="middle-panel">
+            <video id="video" autoplay playsinline muted></video>
         </div>
 
+        <div class="right-panel">
+            <div class="diamond-chart-header">
+                <div class="diamond-chart-title"><strong>Diamond Chart</strong></div>
+                <button class="diamond-helper-btn" onclick="showDiamondHelp()" title="Show Diamond Chart Info" style="background:none;border:none;cursor:pointer;">
+                    <img src="images/pop up icon.png" alt="Info" width="20" height="16" style="vertical-align:middle;" />
+                </button>
+            </div>
+
+
+                <div class="diamond-chart-row">
+                    <span class="diamond-chart-label">LW:</span>
+                    <button class="chart-btn" onclick="updateChart('LW', -1)">-</button>
+                    <span id="lwVal" class="chart-value">0</span>
+                    <button class="chart-btn" onclick="updateChart('LW', 1)">+</button>
+                </div>
+                <div class="diamond-chart-row">
+                    <span class="diamond-chart-label">SW:</span>
+                    <button class="chart-btn" onclick="updateChart('SW', -1)">-</button>
+                    <span id="swVal" class="chart-value">0</span>
+                    <button class="chart-btn" onclick="updateChart('SW', 1)">+</button>
+                </div>
+                <div class="diamond-chart-row">
+                    <span class="diamond-chart-label">PH:</span>
+                    <button class="chart-btn" onclick="updateChart('PH', -1)">-</button>
+                    <span id="phVal" class="chart-value">0</span>
+                    <button class="chart-btn" onclick="updateChart('PH', 1)">+</button>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Footer menu bar -->
     <footer class="idt-footer-container">
         <div class="idt-footer-menu">
-            <!-- Changed Scan from anchor to button for easier JS binding -->
             <button class="menu-btn" id="scanBtn" type="button" title="Scan">
-                <span class="menu-icon">
-                    <img src="~/images/scan.png" alt="Scan" width="32" height="32" />
-                </span>
-                Scan
-            </button>
-
-            <button class="menu-btn" type="button">
-                <span class="menu-icon">
-                    <img src="~/images/home.png" alt="Home" width="32" height="32" />
-                </span>
-                Home
+                <span class="menu-icon"><img src="~/images/scan.png" alt="Scan" width="32" height="32" /></span> Scan
             </button>
             <button class="menu-btn" type="button">
-                <span class="menu-icon">
-                    <img src="~/images/compare.png" alt="Compare" width="32" height="32" />
-                </span>
-                Compare
+                <span class="menu-icon"><img src="~/images/home.png" alt="Home" width="32" height="32" /></span> Home
             </button>
             <button class="menu-btn" type="button">
-                <span class="menu-icon">
-                    <img src="~/images/result.png" alt="Result" width="32" height="32" />
-                </span>
-                Result
+                <span class="menu-icon"><img src="~/images/compare.png" alt="Compare" width="32" height="32" /></span> Compare
             </button>
             <button class="menu-btn" type="button">
-                <span class="menu-icon">
-                    <img src="~/images/history.png" alt="History" width="32" height="32" />
-                </span>
-                History
+                <span class="menu-icon"><img src="~/images/result.png" alt="Result" width="32" height="32" /></span> Result
             </button>
             <button class="menu-btn" type="button">
-                <span class="menu-icon">
-                    <img src="~/images/certificate.png" alt="Certificate" width="32" height="32" />
-                </span>
-                Certificate
+                <span class="menu-icon"><img src="~/images/history.png" alt="History" width="32" height="32" /></span> History
+            </button>
+            <button class="menu-btn" type="button">
+                <span class="menu-icon"><img src="~/images/certificate.png" alt="Certificate" width="32" height="32" /></span> Certificate
             </button>
         </div>
-
         <div class="idt-footer-info">
             <div class="footer-left">IDT Gemological Laboratories Worldwide</div>
             <div class="footer-separator"></div>
@@ -395,93 +478,87 @@
     </footer>
 
     <script>
-        // Create a scanning overlay element
+        // Overlay for scanning
         const scanningOverlay = document.createElement('div');
-        scanningOverlay.id = 'scanningOverlay';
-        scanningOverlay.style.position = 'fixed';
-        scanningOverlay.style.top = '0';
-        scanningOverlay.style.left = '0';
-        scanningOverlay.style.width = '100%';
-        scanningOverlay.style.height = '100%';
-        scanningOverlay.style.background = 'rgba(0,0,0,0.6)';
-        scanningOverlay.style.display = 'flex';
-        scanningOverlay.style.alignItems = 'center';
-        scanningOverlay.style.justifyContent = 'center';
-        scanningOverlay.style.color = '#fff';
-        scanningOverlay.style.fontSize = '2rem';
-        scanningOverlay.style.fontWeight = 'bold';
-        scanningOverlay.style.zIndex = '9999';
-        scanningOverlay.style.display = 'none';
-        scanningOverlay.innerText = 'Scanning...';
+        scanningOverlay.id = "scanningOverlay";
+        scanningOverlay.style.position = "fixed";
+        scanningOverlay.style.top = "0";
+        scanningOverlay.style.left = "0";
+        scanningOverlay.style.width = "100%";
+        scanningOverlay.style.height = "100%";
+        scanningOverlay.style.background = "rgba(0,0,0,0.6)";
+        scanningOverlay.style.display = "none";
+        scanningOverlay.style.alignItems = "center";
+        scanningOverlay.style.justifyContent = "center";
+        scanningOverlay.style.color = "#fff";
+        scanningOverlay.style.fontSize = "2rem";
+        scanningOverlay.style.fontWeight = "bold";
+        scanningOverlay.style.zIndex = "9999";
+        scanningOverlay.innerText = "Scanning...";
         document.body.appendChild(scanningOverlay);
 
-        // Show scanning overlay
-        function showScanningOverlay() {
-            scanningOverlay.style.display = 'flex';
-        }
+        function showScanningOverlay() { scanningOverlay.style.display = "flex"; }
+        function hideScanningOverlay() { scanningOverlay.style.display = "none"; }
 
-        // Hide scanning overlay
-        function hideScanningOverlay() {
-            scanningOverlay.style.display = 'none';
-        }
-
-        // Start camera stream as before
         navigator.mediaDevices.getUserMedia({ video: true })
-          .then(function (stream) {
-              document.getElementById('video').srcObject = stream;
-          })
-          .catch(function (err) {
-              console.error("Error accessing camera: ", err);
-          });
+        .then(function(stream) {
+            document.getElementById('video').srcObject = stream;
+        })
+        .catch(function(err) {
+            console.error("Error accessing camera: ", err);
+        });
 
-        // Capture single image from video as base64 data URL
         function captureImageFromVideo(videoElement) {
-            const canvas = document.createElement('canvas');
+            var canvas = document.createElement('canvas');
             canvas.width = videoElement.videoWidth;
             canvas.height = videoElement.videoHeight;
-            const ctx = canvas.getContext('2d');
+            var ctx = canvas.getContext('2d');
             ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
             return canvas.toDataURL('image/png');
         }
 
-        // Capture 6 images at 3-second intervals and send to server
         async function captureImagesAndSend() {
-            showScanningOverlay(); // show overlay immediately
-
-            const video = document.getElementById('video');
-            const images = [];
+            showScanningOverlay();
+            let video = document.getElementById('video');
+            let images = [];
             for (let i = 0; i < 6; i++) {
                 images.push(captureImageFromVideo(video));
-                await new Promise(r => setTimeout(r, 3000)); // wait 3 sec each
+                await new Promise(r => setTimeout(r, 3000));
             }
-
-            // Send images to server (endpoint needs to be implemented in your backend)
             fetch('/Home/SaveCapturedImages', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(images)
             })
-            .then(response => response.json())
+            .then(res => res.json())
             .then(data => {
-                hideScanningOverlay(); // hide message before navigating
-                if (data.success) {
+                hideScanningOverlay();
+                if(data.success) {
                     window.location.href = '/Compare';
                 } else {
-                    alert('Failed to save images: ' + (data.message || 'Unknown error'));
+                    alert('Failed to save images: ' + (data.message || 'Unknown'));
                 }
             })
             .catch(err => {
                 hideScanningOverlay();
-                console.error('Error sending images:', err);
+                console.error(err);
             });
         }
 
-        // Bind the captureImagesAndSend function to Scan button
-        document.getElementById('scanBtn').addEventListener('click', function (e) {
+        document.getElementById('scanBtn').addEventListener('click', e => {
             e.preventDefault();
             captureImagesAndSend();
         });
+
+        // Diamond chart handlers
+        let chartValues = { LW: 0, SW: 0, PH: 0 };
+        function updateChart(type, delta) {
+            const min = -4, max = 4;
+            chartValues[type] += delta;
+            if (chartValues[type] < min) chartValues[type] = min;
+            if (chartValues[type] > max) chartValues[type] = max;
+            document.getElementById(type.toLowerCase() + 'Val').innerText = chartValues[type];
+        }
     </script>
 </body>
 </html>
-
