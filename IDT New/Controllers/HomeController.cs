@@ -12,6 +12,10 @@ public class HomeController : Controller
     {
         return View("Index");
     }
+    //public IActionResult Help()
+    //{
+    //    return View();
+    //}
 
     [HttpPost]
     public async Task<IActionResult> SaveCapturedImages([FromBody] List<string> base64Images)

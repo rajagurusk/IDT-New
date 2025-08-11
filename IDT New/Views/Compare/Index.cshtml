@@ -249,7 +249,7 @@
         }
 
         .diamond-chart-box {
-            margin-top: 10px;
+            margin-top: 1px;
             width: 100%;
             background: #f9f9ef;
             border: 1.5px solid #facd02;
@@ -410,22 +410,42 @@
                 background: #222;
                 margin: 0 15px;
             }
+
+        .header-extra {
+            display: flex;
+            align-items: center; /* Vertical centering */
+            gap: 5px; /* Space between image and text */
+            font-size: 1.07rem; /* Optional: control text size */
+            font-weight: 700;
+        }
+
+            .header-extra img {
+                display: block;
+                height: 150px;
+                width: 100px; /* desired width */
+            }
         </style>
 
 </head>
 <body>
     <div class="idt-header">
         <div class="header-left-content">
-            <img src="~/images/idt-logo.png" alt="IDT Logo" style="height: 46px; margin-right: 12px;" />
+            <div class="header-icons"></div>
+            <div class="header-extra">
+                <img src="~/images/IDT only logo.png" alt="SYD Logo" style="height:80px; vertical-align:middle; margin-right:0px;" />
+                <span><strong>SYD-100</strong></span>
+            </div>
         </div>
         <div class="header-title">COMPARE</div>
         <div class="header-right-buttons">
-            <button type="button" class="header-icon-btn" title="Help">
+            <button type="button" class="header-icon-btn" title="Help" onclick="window.location.href='/Help'">
                 <img src="images/headset.png" alt="Headset" width="32" height="32" />
             </button>
-            <button type="button" class="header-icon-btn" title="Back">
+
+            <button type="button" class="header-icon-btn" title="Back" onclick="onArrowClick()">
                 <img src="images/arrow.png" alt="Arrow" width="32" height="32" />
             </button>
+
             <button type="button" class="header-icon-btn" title="Power">
                 <img src="images/power.png" alt="Power" width="32" height="32" />
             </button>
@@ -435,7 +455,7 @@
     <div class="main-wrap">
         <!-- Left compare controls -->
         <div class="compare-left-panel">
-            <img class="compare-logo" src="~/images/idt-logo.png" alt="IDT Logo" />
+            <img class="compare-logo" src="~/images/IDT half logo.png" alt="IDT Logo" />
             <div class="compare-label">HPHT</div>
             <input class="compare-input" type="text" />
             <div class="compare-label">CVD</div>
@@ -447,7 +467,7 @@
                 <button>+</button>
             </div>
             <button class="compare-action-btn">Super Image</button>
-            <button class="compare-action-btn">Super Image</button>
+            <button class="compare-action-btn">Simulants</button>
         </div>
 
         <!-- Center comparison grid -->
@@ -565,5 +585,14 @@
             <div class="footer-right">www.idtworldwide.com</div>
         </div>
     </footer>
+    <script>
+        function onHeadsetClick() {
+            window.location.href = '/Help'; // For MVC route
+        }
+                function onArrowClick() {
+            window.history.back(); // go back to the previous page in browser history
+        }
+
+    </script>
 </body>
 </html>

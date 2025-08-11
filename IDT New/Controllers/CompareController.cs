@@ -5,6 +5,10 @@ using System.Text.Json;
 
 public class CompareController : Controller
 {
+    public IActionResult Help()
+    {
+        return View();
+    }
     public IActionResult Index()
     {
         List<string> images = new();

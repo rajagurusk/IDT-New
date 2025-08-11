@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "Help";
     Layout = null; // Remove if you want to use your shared layout
 }
 
@@ -86,7 +86,7 @@
         }
 
         .idt-logo {
-            width: 200px;
+            width: 100px;
             display: block;
             margin: -10px auto 12px auto;
         }
@@ -181,14 +181,14 @@
         }
 
         /* .diamond-chart-title {
-            background: #faeeb8;
-            color: #6a6237;
-            font-weight: bold;
-            font-size: 1.26rem;
-            text-align: center;
-            border-radius: 8px;
-            padding: 5px 0 7px 0;
-            /* remove margin-bottom as it's now on .diamond-chart-header */
+                    background: #faeeb8;
+                    color: #6a6237;
+                    font-weight: bold;
+                    font-size: 1.26rem;
+                    text-align: center;
+                    border-radius: 8px;
+                    padding: 5px 0 7px 0;
+                    /* remove margin-bottom as it's now on .diamond-chart-header */
         /* } */ */
         .diamond-chart-title {
             background: #faeeb8;
@@ -328,51 +328,59 @@
 
         /* Responsive adjustments */
         @@media (max-width: 880px) {
-            .main-wrap
+            .main-wrap {
+                flex-direction: column;
+            }
 
-        {
-            flex-direction: column;
-        }
+            .left-form,
+            .right-panel {
+                max-width: 100%;
+                min-width: auto;
+                padding: 20px;
+                border: none;
+            }
 
-        .left-form,
-        .right-panel {
-            max-width: 100%;
-            min-width: auto;
-            padding: 20px;
-            border: none;
-        }
-
-        .middle-panel {
-            width: 100% !important;
-            max-height: 400px;
-            margin: 15px 0;
-        }
-
+            .middle-panel {
+                width: 100% !important;
+                max-height: 400px;
+                margin: 15px 0;
+            }
         }
 
         @@media (max-width: 700px) {
-            .diamond-chart-row
+            .diamond-chart-row {
+                gap: 8px;
+            }
 
-        {
-            gap: 8px;
-        }
+            .diamond-chart-label {
+                width: 35px;
+                font-size: 0.95rem;
+            }
 
-        .diamond-chart-label {
-            width: 35px;
-            font-size: 0.95rem;
-        }
+            .chart-btn {
+                width: 28px;
+                height: 28px;
+                font-size: 1rem;
+            }
 
-        .chart-btn {
-            width: 28px;
-            height: 28px;
-            font-size: 1rem;
-        }
+            .chart-value {
+                width: 20px;
+                font-size: 0.9rem;
+            }
 
-        .chart-value {
-            width: 20px;
-            font-size: 0.9rem;
-        }
+            .header-extra {
+                display: flex;
+                align-items: center; /* Vertical centering */
+                gap: 5px; /* Space between image and text */
+                font-size: 1.07rem; /* Optional: control text size */
+                font-weight: 700;
+            }
 
+                .header-extra img {
+                    display: block;
+                    height: 150px;
+                    width: 200px; /* desired width */
+                }
         }
     </style>
 </head>
@@ -380,7 +388,10 @@
     <div class="idt-header">
         <div class="header-left-content">
             <div class="header-icons"></div>
-            <div class="header-extra">Your Extra Item</div>
+            <div class="header-extra">
+                <img src="~/images/IDT only logo.png" alt="SYD Logo" style="height:100px; vertical-align:middle; margin-right:0px;" />
+                <span><strong>SYD-100</strong></span>
+            </div>
         </div>
         <div class="header-title">HOME</div>
         <div class="header-right-buttons">
@@ -398,7 +409,7 @@
 
     <div class="main-wrap">
         <div class="left-form">
-            <img class="idt-logo" src="~/images/idt-logo.png" alt="IDT Logo" />
+            <img class="idt-logo" src="~/images/IDT half logo.png" alt="IDT Logo" />
             <div class="form-label">Lot No:</div>
             <input class="idt-input" type="text" name="LotNo" />
             <div class="form-label">ID:</div>
@@ -427,26 +438,26 @@
             </div>
 
 
-                <div class="diamond-chart-row">
-                    <span class="diamond-chart-label">LW:</span>
-                    <button class="chart-btn" onclick="updateChart('LW', -1)">-</button>
-                    <span id="lwVal" class="chart-value">0</span>
-                    <button class="chart-btn" onclick="updateChart('LW', 1)">+</button>
-                </div>
-                <div class="diamond-chart-row">
-                    <span class="diamond-chart-label">SW:</span>
-                    <button class="chart-btn" onclick="updateChart('SW', -1)">-</button>
-                    <span id="swVal" class="chart-value">0</span>
-                    <button class="chart-btn" onclick="updateChart('SW', 1)">+</button>
-                </div>
-                <div class="diamond-chart-row">
-                    <span class="diamond-chart-label">PH:</span>
-                    <button class="chart-btn" onclick="updateChart('PH', -1)">-</button>
-                    <span id="phVal" class="chart-value">0</span>
-                    <button class="chart-btn" onclick="updateChart('PH', 1)">+</button>
-                </div>
+            <div class="diamond-chart-row">
+                <span class="diamond-chart-label">LW:</span>
+                <button class="chart-btn" onclick="updateChart('LW', -1)">-</button>
+                <span id="lwVal" class="chart-value">0</span>
+                <button class="chart-btn" onclick="updateChart('LW', 1)">+</button>
+            </div>
+            <div class="diamond-chart-row">
+                <span class="diamond-chart-label">SW:</span>
+                <button class="chart-btn" onclick="updateChart('SW', -1)">-</button>
+                <span id="swVal" class="chart-value">0</span>
+                <button class="chart-btn" onclick="updateChart('SW', 1)">+</button>
+            </div>
+            <div class="diamond-chart-row">
+                <span class="diamond-chart-label">PH:</span>
+                <button class="chart-btn" onclick="updateChart('PH', -1)">-</button>
+                <span id="phVal" class="chart-value">0</span>
+                <button class="chart-btn" onclick="updateChart('PH', 1)">+</button>
             </div>
         </div>
+    </div>
     </div>
 
     <footer class="idt-footer-container">
@@ -560,5 +571,15 @@
             document.getElementById(type.toLowerCase() + 'Val').innerText = chartValues[type];
         }
     </script>
+    <script>
+        function onHeadsetClick() {
+            window.location.href = '/Help'; // For MVC route
+        }
+                function onArrowClick() {
+            window.history.back(); // go back to the previous page in browser history
+        }
+
+    </script>
+
 </body>
 </html>

@@ -1,0 +1,140 @@
+﻿@{
+    ViewData["Title"] = "Settings";
+    Layout = null; // Or use your shared layout for consistent header/footer
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Settings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        body {
+            background: #fff;
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        .settings-container {
+            max-width: 700px;
+            min-height: 520px;
+            margin: 56px auto;
+            padding: 40px 40px 24px 40px;
+            background: #fffde7;
+            border: 2px solid #ffe684;
+            border-radius: 18px;
+            box-shadow: 0 2px 20px #f8eaac70;
+        }
+        .settings-logo {
+            width: 140px;
+            display: block;
+            margin: 0 auto 34px auto;
+        }
+        .settings-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #865800;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .settings-form-section {
+            margin: 24px 0 38px 0;
+        }
+        .settings-label {
+            font-weight: 600;
+            color: #7e6825;
+            margin-bottom: 7px;
+            display: block;
+            font-size: 1.12rem;
+        }
+        .settings-input {
+            padding: 8px 14px;
+            width: 100%;
+            max-width: 340px;
+            border-radius: 7px;
+            border: 1.5px solid #ecc204;
+            background: #fafafb;
+            font-size: 1rem;
+            margin-bottom: 21px;
+            box-sizing: border-box;
+        }
+        .settings-btn-row {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 11px;
+        }
+        .settings-btn {
+            border-radius: 9px;
+            padding: 12px 28px;
+            border: 1.5px solid #ffc004;
+            background: #ffc004;
+            color: #222;
+            font-weight: 600;
+            font-size: 1.09rem;
+            cursor: pointer;
+            transition: background 0.16s;
+        }
+        .settings-btn:hover {
+            background: #ffeaa7;
+        }
+        .settings-contact {
+            margin-top: 28px;
+            background: #fff;
+            border: 1px solid #f8dd90;
+            border-radius: 12px;
+            padding: 17px 14px 10px 14px;
+            text-align: center;
+            color: #886d1a;
+            font-size: 1.05rem;
+            font-weight: 500;
+        }
+        .settings-contact a, .settings-contact span {
+            color: #8b7c3e;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        @@media (max-width: 650px) {
+            .settings-container { padding: 13px 6px; }
+            .settings-btn-row { flex-direction: column; gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="settings-container">
+        <img src="~/images/idt-logo.png" alt="IDT Logo" class="settings-logo" />
+        <div class="settings-title">Settings</div>
+        <form>
+            <div class="settings-form-section">
+                <label class="settings-label" for="language">Language</label>
+                <select id="language" class="settings-input">
+                    <option>English</option>
+                    <option>Hindi</option>
+                    <option>French</option>
+                </select>
+
+                <label class="settings-label" for="theme">Theme</label>
+                <select id="theme" class="settings-input">
+                    <option>Classic</option>
+                    <option>Dark</option>
+                    <option>Light</option>
+                </select>
+
+                <label class="settings-label" for="autosave">Auto Save Setting</label>
+                <input type="checkbox" id="autosave" style="margin-right:9px;" /> Enable
+            </div>
+            <div class="settings-btn-row">
+                <button class="settings-btn" type="submit">Save</button>
+                <button class="settings-btn" type="reset">Reset</button>
+            </div>
+        </form>
+        <div class="settings-contact">
+            <div>
+                <span>Contact Us:</span><br>
+                <a href="mailto:info@idtworldwide.com">info@idtworldwide.com</a> <br>
+                <a href="https://www.idtworldwide.com" target="_blank">www.idtworldwide.com</a> <br>
+                <span>Phone: +91 98771 99999</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
