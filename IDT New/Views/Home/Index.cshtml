@@ -474,9 +474,10 @@
             <button class="menu-btn" type="button">
                 <span class="menu-icon"><img src="~/images/result.png" alt="Result" width="32" height="32" /></span> Result
             </button>
-            <button class="menu-btn" type="button">
+            <button id="historyBtn" class="menu-btn" type="button">
                 <span class="menu-icon"><img src="~/images/history.png" alt="History" width="32" height="32" /></span> History
             </button>
+
             <button class="menu-btn" type="button">
                 <span class="menu-icon"><img src="~/images/certificate.png" alt="Certificate" width="32" height="32" /></span> Certificate
             </button>
@@ -580,6 +581,10 @@
         }
 
     </script>
-
+    <script>
+        document.getElementById("historyBtn").addEventListener("click", function() {
+            window.location.href = "/History"; // Or your MVC route like '/History/Index'
+        });
+    </script>
 </body>
 </html>

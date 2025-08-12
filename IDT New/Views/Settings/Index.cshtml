@@ -1,140 +1,486 @@
 ﻿@{
     ViewData["Title"] = "Settings";
-    Layout = null; // Or use your shared layout for consistent header/footer
+    Layout = null;
 }
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Settings</title>
+    <title>@ViewData["Title"]</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <style>
         body {
             background: #fff;
-            margin: 0;
             font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
         }
-        .settings-container {
-            max-width: 700px;
-            min-height: 520px;
-            margin: 56px auto;
-            padding: 40px 40px 24px 40px;
-            background: #fffde7;
-            border: 2px solid #ffe684;
-            border-radius: 18px;
-            box-shadow: 0 2px 20px #f8eaac70;
-        }
-        .settings-logo {
-            width: 140px;
-            display: block;
-            margin: 0 auto 34px auto;
-        }
-        .settings-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #865800;
-            margin-bottom: 24px;
-            text-align: center;
-        }
-        .settings-form-section {
-            margin: 24px 0 38px 0;
-        }
-        .settings-label {
-            font-weight: 600;
-            color: #7e6825;
-            margin-bottom: 7px;
-            display: block;
-            font-size: 1.12rem;
-        }
-        .settings-input {
-            padding: 8px 14px;
+
+        .idt-header {
             width: 100%;
-            max-width: 340px;
-            border-radius: 7px;
-            border: 1.5px solid #ecc204;
-            background: #fafafb;
-            font-size: 1rem;
-            margin-bottom: 21px;
+            height: 60px; /* adjust if needed */
+            display: flex;
+            align-items: center;
+            position: relative; /* for absolute centering */
+            padding: 0 24px;
+            border-bottom: 1px solid #ede9d2;
+            background: #fff;
             box-sizing: border-box;
         }
-        .settings-btn-row {
+
+        .header-left-content {
             display: flex;
+            align-items: center;
             gap: 20px;
-            justify-content: center;
-            margin-top: 11px;
         }
-        .settings-btn {
-            border-radius: 9px;
-            padding: 12px 28px;
-            border: 1.5px solid #ffc004;
-            background: #ffc004;
+
+        .header-title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2.2rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #222;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        .header-right-buttons {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-left: auto;
+            background-color: transparent;
+            border: none;
+        }
+
+        .header-icon-btn {
+            border: none;
+            background-color: transparent;
+            outline: none;
+            box-shadow: none;
+        }
+
+        .main-wrap {
+            display: flex;
+            flex-direction: row;
+            flex-grow: 1;
+            min-height: 0;
+        }
+
+        .left-form {
+            background: #fffde7;
+            border-right: 1px solid #fce9a1;
+            min-width: 320px;
+            max-width: 320px;
+            padding: 40px 24px;
+            box-sizing: border-box;
+        }
+
+        .idt-logo {
+            width: 100px;
+            display: block;
+            margin: -10px auto 12px auto;
+        }
+
+        .settings-tabs {
+            margin: 0 32px;
+            border-bottom: 2.5px solid #ffd900;
+            display: flex;
+            gap: 14px;
+        }
+
+            .settings-tabs .tab-btn {
+                background: transparent;
+                border: none;
+                padding: 14px 22px 8px 22px;
+                color: #b59c09;
+                font-size: 1.15em;
+                font-weight: 600;
+                border-bottom: 2.5px solid transparent;
+                cursor: pointer;
+                transition: color 0.14s, border-color 0.14s;
+                border-radius: 0;
+            }
+
+                .settings-tabs .tab-btn.active {
+                    color: #bb9f00;
+                    border-bottom: 3px solid #e6c200;
+                }
+
+        .settings-tab-content {
+            padding: 28px 32px 16px 32px;
+            background: #fff;
+            border-bottom: 2px solid #ffd76b;
+        }
+
+        .settings-fields-row {
+            display: flex;
+            border: 2px solid #e6c157;
+            border-radius: 14px;
+            background: #fffded;
+            gap: 35px;
+            padding: 28px 24px 20px 24px;
+        }
+
+        .settings-col {
+            flex: 1 1 350px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 1.11em;
+        }
+
+        .settings-entry-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 3px;
+        }
+
+            .settings-entry-row label {
+                flex: 0 0 150px;
+            }
+
+            .settings-entry-row input {
+                background: #fff;
+                border: 1.3px solid #e6c157;
+                border-radius: 7px;
+                padding: 6px 8px;
+                font-size: 1em;
+                width: 112px;
+                margin-right: 12px;
+            }
+
+        .settings-range {
+            color: #d8b215;
+            font-size: 0.98em;
+            min-width: 80px;
+            text-align: left;
+        }
+
+        .settings-buttons {
+            margin-top: 18px;
+            display: flex;
+            gap: 15px;
+        }
+
+            .settings-buttons button {
+                border-radius: 7px;
+                padding: 9px 38px;
+                font-size: 1em;
+                font-weight: 500;
+                border: 1.5px solid #f3e269;
+                cursor: pointer;
+            }
+
+            .settings-buttons .save-btn {
+                background: #ffe345;
+                border-color: #dcc21d;
+            }
+
+            .settings-buttons .discard-btn {
+                background: #fff;
+                color: #c92b25;
+                border-color: #e6cf79;
+            }
+
+        .settings-bottom-fields {
+            display: flex;
+            gap: 90px;
+            padding: 19px 0 7px 0;
+            justify-content: center;
+        }
+
+        .settings-bottom-fields-col {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 180px;
+        }
+
+            .settings-bottom-fields-col label {
+                font-size: 1em;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .settings-bottom-fields-col input {
+                margin-left: 12px;
+                width: 76px;
+                border: 1px solid #e6c157;
+                border-radius: 6px;
+                padding: 4px 7px;
+                font-size: 1em;
+            }
+
+        .settings-back-btn {
+            margin: 10px 36px 0 0;
+            float: right;
+            background: #fffbea;
+            color: #a79700;
+            border: 1.8px solid #ffe345;
+            border-radius: 7px;
+            padding: 7px 34px;
+            font-size: 1em;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .idt-footer-info {
+            width: 100%;
+            background: #fcc005;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 20px;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        .footer-left,
+        .footer-right {
             color: #222;
             font-weight: 600;
-            font-size: 1.09rem;
-            cursor: pointer;
-            transition: background 0.16s;
+            font-size: 1.1rem;
+            white-space: nowrap;
         }
-        .settings-btn:hover {
-            background: #ffeaa7;
+
+        .footer-separator {
+            width: 1px;
+            height: 24px;
+            background: #222;
+            margin: 0 15px;
         }
-        .settings-contact {
-            margin-top: 28px;
-            background: #fff;
-            border: 1px solid #f8dd90;
-            border-radius: 12px;
-            padding: 17px 14px 10px 14px;
-            text-align: center;
-            color: #886d1a;
-            font-size: 1.05rem;
-            font-weight: 500;
-        }
-        .settings-contact a, .settings-contact span {
-            color: #8b7c3e;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        @@media (max-width: 650px) {
-            .settings-container { padding: 13px 6px; }
-            .settings-btn-row { flex-direction: column; gap: 12px; }
+
+        @@media (max-width:900px) {
+            .settings-fields-row {
+                flex-direction: column;
+                gap: 22px;
+            }
+
+            .settings-bottom-fields {
+                gap: 38px;
+            }
+
+            .settings-box {
+                margin: 0;
+            }
+
+            .settings-header, .settings-tabs, .settings-tab-content {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="settings-container">
-        <img src="~/images/idt-logo.png" alt="IDT Logo" class="settings-logo" />
-        <div class="settings-title">Settings</div>
-        <form>
-            <div class="settings-form-section">
-                <label class="settings-label" for="language">Language</label>
-                <select id="language" class="settings-input">
-                    <option>English</option>
-                    <option>Hindi</option>
-                    <option>French</option>
-                </select>
-
-                <label class="settings-label" for="theme">Theme</label>
-                <select id="theme" class="settings-input">
-                    <option>Classic</option>
-                    <option>Dark</option>
-                    <option>Light</option>
-                </select>
-
-                <label class="settings-label" for="autosave">Auto Save Setting</label>
-                <input type="checkbox" id="autosave" style="margin-right:9px;" /> Enable
-            </div>
-            <div class="settings-btn-row">
-                <button class="settings-btn" type="submit">Save</button>
-                <button class="settings-btn" type="reset">Reset</button>
-            </div>
-        </form>
-        <div class="settings-contact">
-            <div>
-                <span>Contact Us:</span><br>
-                <a href="mailto:info@idtworldwide.com">info@idtworldwide.com</a> <br>
-                <a href="https://www.idtworldwide.com" target="_blank">www.idtworldwide.com</a> <br>
-                <span>Phone: +91 98771 99999</span>
+    <div class="idt-header">
+        <div class="header-left-content">
+            <div class="header-icons"></div>
+            <div class="header-extra">
+                <img src="~/images/IDT only logo.png" alt="SYD Logo" style="height:100px; vertical-align:middle; margin-right:0px;" />
+                <span><strong>SYD-100</strong></span>
             </div>
         </div>
+        <div class="header-title">SETTINGS</div>
+        <div class="header-right-buttons">
+            <button type="button" class="header-icon-btn" title="Help" onclick="onHeadsetClick()">
+                <img src="images/headset.png" alt="Headset" width="32" height="32" />
+            </button>
+            <button type="button" class="header-icon-btn" title="Back" onclick="onArrowClick()">
+                <img src="images/arrow.png" alt="Arrow" width="32" height="32" />
+            </button>
+            <button type="button" class="header-icon-btn" title="Power" onclick="onPowerClick()">
+                <img src="images/power.png" alt="Power" width="32" height="32" />
+            </button>
+        </div>
     </div>
+    <div class="settings-tabs" id="tabs">
+        <button type="button" class="tab-btn active" data-tab="preview">Preview</button>
+        <button type="button" class="tab-btn" data-tab="whitelight">White Light</button>
+        <button type="button" class="tab-btn" data-tab="fluorescence">Fluorescence</button>
+        <button type="button" class="tab-btn" data-tab="shortphos">Short Phos</button>
+        <button type="button" class="tab-btn" data-tab="longphos">Long Phos</button>
+        <button type="button" class="tab-btn" data-tab="superimage">Super Image</button>
+        <button type="button" class="tab-btn" data-tab="simulant">Simulant</button>
+    </div>
+    <form method="post">
+        <!-- Tab panels: repeat for all tabs -->
+        @foreach (var tab in new[] { "preview", "whitelight", "fluorescence", "shortphos", "longphos", "superimage", "simulant" })
+        {
+            <div class="settings-tab-content @(tab != "preview" ? "d-none" : "")" id="@tab-panel">
+                <div class="settings-fields-row">
+                    <div class="settings-col">
+                        <div class="settings-entry-row">
+                            <label>Width:</label>
+                            <input type="number" min="0" max="5000" name="Width" />
+                            <span class="settings-range">0 to 5000</span>
+                        </div>
+                        <div class="settings-entry-row">
+                            <label>Height:</label>
+                            <input type="number" min="0" max="5000" name="Height" />
+                            <span class="settings-range">0 to 5000</span>
+                        </div>
+                        <div class="settings-entry-row">
+                            <label>Brightness:</label>
+                            <input type="number" step="0.01" min="-1" max="1" name="Brightness" />
+                            <span class="settings-range">-1.0 to 1.0</span>
+                        </div>
+                        <div class="settings-entry-row">
+                            <label>Contrast:</label>
+                            <input type="number" min="0" max="32" name="Contrast" />
+                            <span class="settings-range">0.0 to 32.0</span>
+                        </div>
+                        <div class="settings-entry-row">
+                            <label>Saturation:</label>
+                            <input type="number" min="0" max="32" name="Saturation" />
+                            <span class="settings-range">0.0 to 32.0</span>
+                        </div>
+                        <div class="settings-entry-row">
+                            <label>Red Balance:</label>
+                            <input type="number" min="0" max="32" name="RedBalance" />
+                            <span class="settings-range">0.0 to 32.0</span>
+                        </div>
+                        <div class="settings-entry-row">
+                            <label>Blue Balance:</label>
+                            <input type="number" min="0" max="32" name="BlueBalance" />
+                            <span class="settings-range">0.0 to 32.0</span>
+                        </div>
+                        <div class="settings-entry-row">
+                            <label>Sharpness:</label>
+                            <input type="number" step="0.01" min="0.6" max="16" name="Sharpness" />
+                            <span class="settings-range">0.6 to 16.0</span>
+                        </div>
+                        <div class="settings-entry-row">
+                            <label>Rotate:</label>
+                            <input type="number" min="0" max="360" name="Rotate" />
+                            <span class="settings-range">0 to 360</span>
+                        </div>
+                        <div class="settings-entry-row">
+                            <label>Shutter:</label>
+                            <input type="number" min="0" max="1000000" name="Shutter" />
+                            <span class="settings-range">0 to 1000000</span>
+                        </div>
+                        <div class="settings-entry-row">
+                            <label>Exposure Comp.:</label>
+                            <input type="number" step="0.01" min="-8" max="8" name="ExposureComp" />
+                            <span class="settings-range">-8.0 to 8.0</span>
+                        </div>
+                        <div class="settings-entry-row">
+                            <label>Gain:</label>
+                            <input type="number" min="0" max="32" name="Gain" />
+                            <span class="settings-range">0.0 to 32.0</span>
+                        </div>
+                        <div class="settings-entry-row">
+                            <label>Framerate:</label>
+                            <input type="number" min="0" max="30" name="Framerate" />
+                            <span class="settings-range">0 to 30</span>
+                        </div>
+                        <div class="settings-entry-row">
+                            <label>Analog Gain:</label>
+                            <input type="number" min="0" max="32" name="AnalogGain" />
+                            <span class="settings-range">0.0 to 32.0</span>
+                        </div>
+                    </div>
+                    <div class="settings-col">
+                        <div class="settings-entry-row">
+                            <label>White Brightness Mode:</label>
+                            <input type="text" name="WhiteBrightnessMode" />
+                            <span class="settings-range"></span>
+                        </div>
+                        <div class="settings-entry-row">
+                            <label>Exposure Metering Mode:</label>
+                            <input type="text" name="ExposureMeteringMode" />
+                            <span class="settings-range"></span>
+                        </div>
+                        <div class="settings-entry-row">
+                            <label>Exposure Mode:</label>
+                            <input type="text" name="ExposureMode" />
+                            <span class="settings-range"></span>
+                        </div>
+                        <div class="settings-entry-row">
+                            <label>Denoise:</label>
+                            <input type="text" name="Denoise" />
+                            <span class="settings-range"></span>
+                        </div>
+                        <div class="settings-entry-row">
+                            <label>Quality:</label>
+                            <input type="text" name="Quality" />
+                            <span class="settings-range"></span>
+                        </div>
+                        <div class="settings-entry-row">
+                            <label>H Flip:</label>
+                            <input type="text" name="HFlip" />
+                            <span class="settings-range"></span>
+                        </div>
+                        <div class="settings-entry-row">
+                            <label>V Flip:</label>
+                            <input type="text" name="VFlip" />
+                            <span class="settings-range"></span>
+                        </div>
+                        <div class="settings-entry-row">
+                            <label>Camera Preview:</label>
+                            <input type="text" name="CameraPreview" />
+                            <span class="settings-range"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="settings-buttons">
+                    <button type="submit" class="save-btn">Save</button>
+                    <button type="reset" class="discard-btn">Discard</button>
+                </div>
+            </div>
+        }
+        <div class="settings-bottom-fields">
+            <div class="settings-bottom-fields-col">
+                <label>Exposure Comp. <input type="number" min="0" max="999" /></label>
+                <label>Gain <input type="number" min="0" max="999" /></label>
+                <label>Framerate <input type="number" min="0" max="999" /></label>
+                <label>Analog Gain <input type="number" min="0" max="999" /></label>
+            </div>
+            <div class="settings-bottom-fields-col">
+                <label>Exposure Comp. <input type="number" min="0" max="999" /></label>
+                <label>Gain <input type="number" min="0" max="999" /></label>
+                <label>Framerate <input type="number" min="0" max="999" /></label>
+                <label>Analog Gain <input type="number" min="0" max="999" /></label>
+            </div>
+        </div>
+        <button type="button" class="settings-back-btn" onclick="window.location.href='@Url.Action("Index", "Home")'">BACK</button>
+
+    </form>
+    <div class="idt-footer-info">
+        <div class="footer-left">IDT Gemological Laboratories Worldwide</div>
+        <div class="footer-separator"></div>
+        <div class="footer-right">www.idtworldwide.com</div>
+    </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Tab switching logic
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabPanels = [
+            'preview','whitelight','fluorescence','shortphos','longphos','superimage','simulant'
+        ].map(tab => document.getElementById(tab + '-panel'));
+        tabBtns.forEach((btn, idx) => {
+            btn.addEventListener('click', () => {
+                tabBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                tabPanels.forEach(panel => panel.classList.add('d-none'));
+                tabPanels[idx].classList.remove('d-none');
+            });
+        });
+    </script>
+    <script>
+        function onHeadsetClick() {
+            window.location.href = '/Help'; // For MVC route
+        }
+                function onArrowClick() {
+            window.history.back(); // go back to the previous page in browser history
+        }
+
+    </script>
 </body>
 </html>

@@ -566,12 +566,9 @@
                 </span>
                 Result
             </a>
-            <a class="menu-btn" href="/History">
-                <span class="menu-icon">
-                    <img src="~/images/history.png" alt="History" width="32" height="32" />
-                </span>
-                History
-            </a>
+            <button id="historyBtn" class="menu-btn" type="button">
+                <span class="menu-icon"><img src="~/images/history.png" alt="History" width="32" height="32" /></span> History
+            </button>
             <a class="menu-btn" href="/Certificate">
                 <span class="menu-icon">
                     <img src="~/images/certificate.png" alt="Certificate" width="32" height="32" />
@@ -593,6 +590,11 @@
             window.history.back(); // go back to the previous page in browser history
         }
 
+    </script>
+    <script>
+        document.getElementById("historyBtn").addEventListener("click", function() {
+            window.location.href = "/History"; // Or your MVC route like '/History/Index'
+        });
     </script>
 </body>
 </html>
