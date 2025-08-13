@@ -1,0 +1,389 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Result | IDT</title>
+    <link rel="stylesheet" href="result.css">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #fff;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+
+        .idt-header {
+            width: 100%;
+            height: 60px; /* adjust if needed */
+            display: flex;
+            align-items: center;
+            position: relative; /* for absolute centering */
+            padding: 0 24px;
+            border-bottom: 1px solid #ede9d2;
+            background: #fff;
+            box-sizing: border-box;
+        }
+
+        .header-left-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2.2rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #222;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        .header-right-buttons {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-left: auto;
+            background-color: transparent;
+            border: none;
+        }
+
+        .header-icon-btn {
+            border: none;
+            background-color: transparent;
+            outline: none;
+            box-shadow: none;
+        }
+
+        .main-wrap {
+            display: flex;
+            flex-direction: row;
+            flex-grow: 1;
+            min-height: 0;
+        }
+
+        .left-form {
+            background: #fffde7;
+            border-right: 1px solid #fce9a1;
+            min-width: 320px;
+            max-width: 320px;
+            padding: 40px 24px;
+            box-sizing: border-box;
+        }
+
+        .idt-logo {
+            width: 100px;
+            display: block;
+            margin: -10px auto 12px auto;
+        }
+        .main-content {
+            flex: 1;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 300px;
+            border-right: 1px solid #ede9d2;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+            .sidebar .sidebar-box {
+                width: 100%;
+                background: #fffbe6;
+                border: 1.5px solid #f3e29c;
+                border-radius: 18px;
+                padding: 20px 18px;
+                display: flex;
+                flex-direction: column;
+                gap: 18px;
+                align-items: center;
+            }
+
+                .sidebar .sidebar-box button {
+                    width: 90%;
+                    margin-bottom: 4px;
+                }
+
+        .number-section, .controls {
+            width: 100%;
+        }
+
+        .content-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .result-grid {
+            width: 650px;
+            height: 320px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 2px;
+            border: 2px solid #f3e29c;
+            border-radius: 16px;
+            background: #faf9ef;
+            margin-top: 40px;
+        }
+
+        .middle-panel {
+            width: 71%;
+            border: 2px solid #f7b913;
+            margin: 0 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            height: calc(100vh - 60px - 90px); /* Adjust for header/footer height */
+            max-height: 725px;
+        }
+
+            .middle-panel img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+
+        .diamond-chart {
+            width: 260px;
+            margin-left: 30px;
+            background: #fffbe6;
+            border: 1.5px solid #f3e29c;
+            border-radius: 18px;
+            padding: 28px 18px;
+        }
+
+        .idt-footer-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fdeec2;
+            border-top: 1.5px solid #f0db26;
+            box-shadow: 0 -2px 16px rgba(240,219,38,0.2);
+            user-select: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1000;
+            font-size: 1rem;
+        }
+
+            .idt-footer-container * {
+                user-select: none;
+            }
+
+            .idt-footer-container a,
+            .idt-footer-container button {
+                cursor: pointer;
+                background: transparent;
+                border: none;
+                padding: 10px 12px;
+                margin: 0 4px;
+                border-radius: 8px;
+                transition: background-color 0.25s ease;
+                font-weight: 600;
+                color: #222;
+                font-size: 1rem;
+            }
+
+                .idt-footer-container a:hover,
+                .idt-footer-container button:hover {
+                    background: #f8d863;
+                    color: #333;
+                }
+
+        .idt-footer-menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 6px 0;
+        }
+
+        .footer-separator {
+            width: 1px;
+            height: 24px;
+            background: #aaa247;
+            margin: 0 15px;
+        }
+
+        .idt-footer-info {
+            background: #f4cb00;
+            padding: 10px 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #3b3a33;
+            font-weight: 700;
+        }
+
+        .footer-left, .footer-right {
+            white-space: nowrap;
+        }
+        /* Simple representation for your diamond chart */
+        .diamond-chart-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 16px;
+            color: #7e6e2c;
+        }
+
+        .diamond-chart-scale {
+            margin-bottom: 20px;
+        }
+
+        .diamond-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1rem;
+        }
+
+        button {
+            border: 2px solid #f4cb00; /* or a specific yellow shade like #f7b913 */
+            background-color: transparent; /* keep background transparent or customize */
+            color: #000; /* text color */
+            padding: 8px 16px; /* adjust padding as needed */
+            border-radius: 6px; /* optional rounded corners */
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="idt-header">
+    <div class="header-left-content">
+        <div class="header-icons"></div>
+        <div class="header-extra">
+            <img src="~/images/IDT only logo.png" alt="SYD Logo" style="height:100px; vertical-align:middle; margin-right:0px;" />
+            <span><strong>SYD-100</strong></span>
+        </div>
+    </div>
+    <div class="header-title">RESULT</div>
+    <div class="header-right-buttons">
+        <button type="button" class="header-icon-btn" title="Help" onclick="onHeadsetClick()">
+            <img src="images/headset.png" alt="Headset" width="32" height="32" />
+        </button>
+        <button type="button" class="header-icon-btn" title="Back" onclick="onArrowClick()">
+            <img src="images/arrow.png" alt="Arrow" width="32" height="32" />
+        </button>
+        <button type="button" class="header-icon-btn" title="Power" onclick="onPowerClick()">
+            <img src="images/power.png" alt="Power" width="32" height="32" />
+        </button>
+    </div>
+    </div>
+    <div class="main-content">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-box">
+                <label>HPHT: <input type="text" value="0" readonly /></label>
+                <label>CVD: <input type="text" value="0" readonly /></label>
+                @* <span style="margin:12px 0;">0</span> *@
+                <div>
+                    <button>Result</button>
+                    <button>Fluorescence</button>
+                    <button>Fluorescence</button>
+                    <button>Short Phosphorescence</button>
+                    <button>Long Phosphorescence</button>
+                    <button>Super Image</button>
+                    <button>Simulants</button>
+                </div>
+                @* <div style="font-size:0.93em; color:#bd9300; background:#fffde6; border-radius:5px; padding:5px 0; width:90%; text-align:center; border:1px solid #efd272;">
+                    0%<br>Storage 256G
+                </div> *@
+            </div>
+        </aside>
+        <section class="content-area middle-panel">
+            <img src="~/images/IDT jcomplete logo.png" alt="Result Image" />
+        </section>
+
+        <!-- Right sidebar for diamond chart -->
+        <aside class="diamond-chart">
+            <div class="diamond-chart-title">Diamond Chart</div>
+            @* <div class="diamond-chart-scale">
+                <div class="diamond-label">L W: &nbsp; <span>-1-2-3-4 0 1 2 3 4</span></div>
+                <hr>
+                <div class="diamond-label">S W: &nbsp; <span>-1-2-3-4 0 1 2 3 4</span></div>
+                <hr>
+                <div class="diamond-label">P H: &nbsp; <span>-1-2-3-4 0 1 2 3 4</span></div>
+            </div> *@
+        </aside>
+    </div>
+    <footer class="idt-footer-container">
+        <div class="idt-footer-menu">
+            <button class="menu-btn" id="scanBtn" type="button" title="Scan">
+                <span class="menu-icon"><img src="~/images/scan.png" alt="Scan" width="32" height="32" /></span> Scan
+            </button>
+            <button class="menu-btn" type="button">
+                <span class="menu-icon"><img src="~/images/home.png" alt="Home" width="32" height="32" /></span> Home
+            </button>
+            <button class="menu-btn" type="button">
+                <span class="menu-icon"><img src="~/images/compare.png" alt="Compare" width="32" height="32" /></span> Compare
+            </button>
+            <!-- Button -->
+            <button id="resultBtn" class="menu-btn" type="button">
+                <span class="menu-icon">
+                    <img src="images/result.png" alt="Result" width="32" height="32" />
+                </span>
+                Result
+            </button>
+
+
+            <button id="historyBtn" class="menu-btn" type="button">
+                <span class="menu-icon"><img src="~/images/history.png" alt="History" width="32" height="32" /></span> History
+            </button>
+
+            <button class="menu-btn" type="button">
+                <span class="menu-icon"><img src="~/images/certificate.png" alt="Certificate" width="32" height="32" /></span> Certificate
+            </button>
+        </div>
+        <div class="idt-footer-info">
+            <div class="footer-left">IDT Gemological Laboratories Worldwide</div>
+            <div class="footer-separator"></div>
+            <div class="footer-right">www.idtworldwide.com</div>
+        </div>
+    </footer>
+    <script>
+        function onHeadsetClick() {
+            window.location.href = '/Help'; // For MVC route
+        }
+                function onArrowClick() {
+            window.history.back(); // go back to the previous page in browser history
+        }
+
+    </script>
+    <script>
+        document.getElementById("historyBtn").addEventListener("click", function() {
+            window.location.href = "/History"; // Or your MVC route like '/History/Index'
+        });
+    </script>
+    <!-- Script -->
+    <script>
+        document.getElementById('resultBtn').addEventListener('click', function() {
+            window.location.href = '/Result';
+        });
+                document.getElementById('certificateBtn').addEventListener('click', function() {
+            window.location.href = '/Certificate';
+        });
+    </script>
+</body>
+</html>

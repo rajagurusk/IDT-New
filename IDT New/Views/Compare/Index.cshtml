@@ -9,233 +9,238 @@
     <meta charset="UTF-8" />
     <title>@ViewData["Title"]</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <style>
-            html, body {
-                height: 100%;
-                margin: 0;
-                font-family: 'Segoe UI', Arial, sans-serif;
-                background: #fff;
-            }
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #fff;
+        }
 
-            body {
-                min-height: 100vh;
-                display: flex;
-                flex-direction: column;
-            }
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
 
-            .idt-header {
-                width: 100%;
-                height: 60px;
-                display: flex;
-                align-items: center;
-                position: relative;
-                padding: 0 24px;
-                border-bottom: 1px solid #ede9d2;
-                background: #fff;
-                box-sizing: border-box;
-            }
+        .idt-header {
+            width: 100%;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 0 24px;
+            border-bottom: 1px solid #ede9d2;
+            background: #fff;
+            box-sizing: border-box;
+        }
 
-            .header-left-content {
-                display: flex;
-                align-items: center;
-                gap: 20px;
-            }
+        .header-left-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
 
-            .header-title {
-                position: absolute;
-                left: 50%;
-                transform: translateX(-50%);
-                font-size: 2.2rem;
-                font-weight: bold;
-                letter-spacing: 2px;
-                color: #222;
-                white-space: nowrap;
-                pointer-events: none;
-            }
+        .header-title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2.2rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #222;
+            white-space: nowrap;
+            pointer-events: none;
+        }
 
-            .header-right-buttons {
-                display: flex;
-                align-items: center;
-                gap: 12px;
-                margin-left: auto;
-                background-color: transparent;
+        .header-right-buttons {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-left: auto;
+            background-color: transparent;
+            border: none;
+        }
+
+        .header-icon-btn {
+            border: none;
+            background-color: transparent;
+            outline: none;
+            box-shadow: none;
+        }
+
+        .main-wrap {
+            display: flex;
+            flex-direction: row;
+            flex-grow: 1;
+            min-height: 0;
+            justify-content: center; /* center the children */
+            align-items: stretch;
+        }
+
+        /* Left compare panel */
+        .compare-left-panel {
+            background: #fffde7;
+            border-right: 1px solid #fce58d;
+            min-width: 270px;
+            max-width: 290px;
+            padding: 40px 24px 12px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .compare-logo {
+            width: 120px;
+            display: block;
+            margin: 0 auto 36px auto;
+        }
+
+        .compare-label {
+            font-size: 1.12rem;
+            font-weight: 500;
+            color: #6a6237;
+            margin: 10px 0 5px 2px;
+        }
+
+        .compare-input {
+            width: 92%;
+            padding: 8px 14px;
+            margin-bottom: 13px;
+            font-size: 1rem;
+            border: 1.5px solid #ecc204;
+            border-radius: 7px;
+            background: #fafafb;
+            box-sizing: border-box;
+        }
+
+        .compare-row {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .compare-btn-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 17px;
+            width: 100%;
+        }
+
+            .compare-btn-group button {
+                width: 36px;
+                height: 32px;
+                font-size: 1.7rem;
                 border: none;
-            }
-
-            .header-icon-btn {
-                border: none;
-                background-color: transparent;
-                outline: none;
-                box-shadow: none;
-            }
-
-            .main-wrap {
-                display: flex;
-                flex-direction: row;
-                flex-grow: 1;
-                min-height: 0;
-                justify-content: center; /* center the children */
-                align-items: stretch;
-            }
-
-            /* Left compare panel */
-            .compare-left-panel {
-                background: #fffde7;
-                border-right: 1px solid #fce58d;
-                min-width: 270px;
-                max-width: 290px;
-                padding: 40px 24px 12px 24px;
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .compare-logo {
-                width: 120px;
-                display: block;
-                margin: 0 auto 36px auto;
-            }
-
-            .compare-label {
-                font-size: 1.12rem;
-                font-weight: 500;
-                color: #6a6237;
-                margin: 10px 0 5px 2px;
-            }
-
-            .compare-input {
-                width: 92%;
-                padding: 8px 14px;
-                margin-bottom: 13px;
-                font-size: 1rem;
-                border: 1.5px solid #ecc204;
+                margin: 0 6px;
                 border-radius: 7px;
-                background: #fafafb;
-                box-sizing: border-box;
-            }
-
-            .compare-row {
-                display: flex;
-                align-items: center;
-                width: 100%;
-                margin-bottom: 15px;
-            }
-
-            .compare-btn-group {
-                display: flex;
-                align-items: center;
-                margin-bottom: 17px;
-                width: 100%;
-            }
-
-                .compare-btn-group button {
-                    width: 36px;
-                    height: 32px;
-                    font-size: 1.7rem;
-                    border: none;
-                    margin: 0 6px;
-                    border-radius: 7px;
-                    background: #fcc005;
-                    cursor: pointer;
-                }
-
-                .compare-btn-group span {
-                    font-size: 1.15rem;
-                    flex: 1;
-                    text-align: center;
-                    margin: 0 6px;
-                }
-
-            .compare-action-btn {
-                width: 90%;
-                border: 1.5px solid #ecc204;
-                border-radius: 7px;
-                padding: 10px 0;
-                background: #fff;
-                font-weight: 600;
-                color: #222;
-                margin-bottom: 10px;
+                background: #fcc005;
                 cursor: pointer;
-                font-size: 1.04rem;
-                transition: background 0.13s;
             }
 
-                .compare-action-btn:hover {
-                    background: #faeeb8;
-                }
-
-            .compare-center-content {
-                flex-grow: 1;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100%;
-                padding: 0 18px;
+            .compare-btn-group span {
+                font-size: 1.15rem;
+                flex: 1;
+                text-align: center;
+                margin: 0 6px;
             }
 
-            .compare-page-grid {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                grid-template-rows: repeat(2, 1fr);
-                gap: 16px; /* More space between cells */
-                width: 800px; /* Adjusted for squareness */
-                height: 700px;
-                max-width: 60vw;
-                max-height: 90vh;
-                border: 2px solid #fac600;
-                border-radius: 14px;
-                background: #fcf9ed;
-                box-sizing: border-box;
-                margin-left: 10px;
+        .compare-action-btn {
+            width: 90%;
+            border: 1.5px solid #ecc204;
+            border-radius: 7px;
+            padding: 10px 0;
+            background: #fff;
+            font-weight: 600;
+            color: #222;
+            margin-bottom: 10px;
+            cursor: pointer;
+            font-size: 1.04rem;
+            transition: background 0.13s;
+        }
+
+            .compare-action-btn:hover {
+                background: #faeeb8;
             }
 
-            .compare-grid-cell {
+        .compare-center-content {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            padding: 0 18px;
+        }
+
+        .compare-page-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 16px; /* More space between cells */
+            width: 800px; /* Adjusted for squareness */
+            height: 700px;
+            max-width: 60vw;
+            max-height: 90vh;
+            border: 2px solid #fac600;
+            border-radius: 14px;
+            background: #fcf9ed;
+            box-sizing: border-box;
+            margin-left: 10px;
+        }
+
+        .compare-grid-cell {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(184, 163, 15, 0.08);
+        }
+
+            .compare-grid-cell img {
+                width: 96%;
+                height: 96%;
+                object-fit: cover;
+                border-radius: 10px;
+                box-shadow: 0 0 3px #000a;
                 position: relative;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background: #000;
-                border-radius: 12px;
-                overflow: hidden;
-                box-shadow: 0 2px 10px rgba(184, 163, 15, 0.08);
+                z-index: 1; /* Lower z-index than labels */
             }
 
-                .compare-grid-cell img {
-                    width: 96%;
-                    height: 96%;
-                    object-fit: cover;
-                    border-radius: 10px;
-                    box-shadow: 0 0 3px #000a;
-                }
 
-            .video-label {
-                position: absolute;
-                top: 10px;
-                left: 12px;
-                padding: 5px 16px;
-                background: rgba(0, 0, 0, 0.6);
-                color: #ffe46b;
-                font-size: 1rem;
-                font-weight: 500;
-                border-radius: 5px;
-                letter-spacing: 1px;
-                user-select: none;
-                pointer-events: none;
-            }
+        .video-label {
+            position: absolute;
+            top: 10px;
+            left: 12px;
+            padding: 5px 16px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #ffe46b;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 5px;
+            letter-spacing: 1px;
+            user-select: none;
+            pointer-events: none;
+            z-index: 10; /* Increase z-index to be above images */
+        }
 
-            /* Right panel */
-            .right-panel {
-                flex: 0 0 300px; /* Fix width to 200px */
-                background-color: #fafbfe;
-                padding: 10px;
-                border-left: 1px solid #f9e7aa;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                min-width: unset; /* Remove min-width if necessary */
-                box-sizing: border-box; /* Include padding in width */
-            }
+
+        /* Right panel */
+        .right-panel {
+            flex: 0 0 300px; /* Fix width to 200px */
+            background-color: #fafbfe;
+            padding: 10px;
+            border-left: 1px solid #f9e7aa;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-width: unset; /* Remove min-width if necessary */
+            box-sizing: border-box; /* Include padding in width */
+        }
         /* Diamond chart box */
         .diamond-chart-header {
             display: flex;
@@ -259,14 +264,14 @@
         }
 
         /* .diamond-chart-title {
-                    background: #faeeb8;
-                    color: #6a6237;
-                    font-weight: bold;
-                    font-size: 1.26rem;
-                    text-align: center;
-                    border-radius: 8px;
-                    padding: 5px 0 7px 0;
-                    /* remove margin-bottom as it's now on .diamond-chart-header */
+                            background: #faeeb8;
+                            color: #6a6237;
+                            font-weight: bold;
+                            font-size: 1.26rem;
+                            text-align: center;
+                            border-radius: 8px;
+                            padding: 5px 0 7px 0;
+                            /* remove margin-bottom as it's now on .diamond-chart-header */
         /* } */ */
         .diamond-chart-title {
             background: #faeeb8;
@@ -334,82 +339,82 @@
         }
 
 
-            .idt-footer-container {
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                background: #fffde4;
-                border-top: 1.5px solid #faeeb8;
-                box-shadow: 0 -2px 16px 0 #f1e27c33;
-                user-select: none;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                z-index: 1000;
+        .idt-footer-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fffde4;
+            border-top: 1.5px solid #faeeb8;
+            box-shadow: 0 -2px 16px 0 #f1e27c33;
+            user-select: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .idt-footer-menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 0 6px 0;
+            width: 100%;
+        }
+
+        .menu-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: none;
+            border: none;
+            margin: 0 6px;
+            padding: 10px 10px 4px 10px;
+            color: black;
+            font-size: 1.01rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.18s;
+            border-radius: 10px;
+        }
+
+            .menu-btn:hover {
+                color: #333333;
+                background: #f0f0f0;
             }
 
-            .idt-footer-menu {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding: 0 0 6px 0;
-                width: 100%;
-            }
+        .menu-icon {
+            font-size: 1.46rem;
+            margin-bottom: 2px;
+            display: block;
+            color: black;
+        }
 
-            .menu-btn {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                background: none;
-                border: none;
-                margin: 0 6px;
-                padding: 10px 10px 4px 10px;
-                color: black;
-                font-size: 1.01rem;
-                font-weight: 600;
-                cursor: pointer;
-                transition: color 0.18s;
-                border-radius: 10px;
-            }
+        .idt-footer-info {
+            width: 100%;
+            background: #fcc005;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 20px;
+            box-sizing: border-box;
+            user-select: none;
+        }
 
-                .menu-btn:hover {
-                    color: #333333;
-                    background: #f0f0f0;
-                }
+        .footer-left,
+        .footer-right {
+            color: #222;
+            font-weight: 600;
+            font-size: 1.1rem;
+            white-space: nowrap;
+        }
 
-            .menu-icon {
-                font-size: 1.46rem;
-                margin-bottom: 2px;
-                display: block;
-                color: black;
-            }
-
-            .idt-footer-info {
-                width: 100%;
-                background: #fcc005;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                padding: 8px 20px;
-                box-sizing: border-box;
-                user-select: none;
-            }
-
-            .footer-left,
-            .footer-right {
-                color: #222;
-                font-weight: 600;
-                font-size: 1.1rem;
-                white-space: nowrap;
-            }
-
-            .footer-separator {
-                width: 1px;
-                height: 24px;
-                background: #222;
-                margin: 0 15px;
-            }
+        .footer-separator {
+            width: 1px;
+            height: 24px;
+            background: #222;
+            margin: 0 15px;
+        }
 
         .header-extra {
             display: flex;
@@ -424,7 +429,7 @@
                 height: 150px;
                 width: 100px; /* desired width */
             }
-        </style>
+    </style>
 
 </head>
 <body>
@@ -488,6 +493,35 @@
                     </div>
                 }
             </div>
+            <style>
+                /* Zoom effect on image hover */
+                .compare-grid-cell img {
+                    transition: transform 0.3s ease;
+                    cursor: pointer;
+                    position: relative;
+                    z-index: 1;
+                }
+
+                    .compare-grid-cell img:hover {
+                        transform: scale(1.2);
+                        z-index: 2; /* ensure zoomed image is on top */
+                    }
+
+                /* Red circle marker - absolute positioned */
+                .red-circle {
+                    position: absolute;
+                    border: 3px solid red;
+                    border-radius: 50%;
+                    pointer-events: none; /* allow clicks to pass through */
+                    box-sizing: border-box;
+                    width: 50px;
+                    height: 50px;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    z-index: 3; /* on top */
+                }
+            </style>
         </div>
         <style>
             .middle-panel {
@@ -507,6 +541,9 @@
                     object-fit: cover;
                 }
         </style>
+
+
+
 
         <!-- Right panel -->
         <div class="right-panel">
@@ -592,8 +629,105 @@
 
     </script>
     <script>
-        document.getElementById("historyBtn").addEventListener("click", function() {
-            window.location.href = "/History"; // Or your MVC route like '/History/Index'
+        document.addEventListener('DOMContentLoaded', function () {
+            const images = document.querySelectorAll('.compare-grid-cell img');
+            const zoomStep = 0.1;
+            const minZoom = 1;
+            const maxZoom = 3;
+            const sharedState = {
+                scale: 1,
+                translateX: 0,
+                translateY: 0,
+                isDragging: false,
+                dragStartX: 0,
+                dragStartY: 0,
+                dragged: false, // flag to detect dragging
+            };
+
+            function updateImageTransform(img, state) {
+                img.style.transform = `translate(${state.translateX}px, ${state.translateY}px) scale(${state.scale})`;
+            }
+
+            function applyTransformToAll() {
+                images.forEach(img => updateImageTransform(img, sharedState));
+            }
+
+            // Add multiple markers without clearing previous
+            function addMarkersAtRelativePosition(relX, relY) {
+                images.forEach(img => {
+                    const container = img.parentNode;
+                    const marker = document.createElement('div');
+                    marker.classList.add('red-circle');
+                    marker.style.position = 'absolute';
+                    marker.style.width = '30px';
+                    marker.style.height = '30px';
+                    marker.style.border = '3px solid red';
+                    marker.style.borderRadius = '50%';
+                    marker.style.pointerEvents = 'none';
+                    marker.style.top = (relY * 100) + '%';
+                    marker.style.left = (relX * 100) + '%';
+                    marker.style.transform = 'translate(-50%, -50%)';
+                    marker.style.zIndex = '5';
+                    container.style.position = 'relative'; // Ensure container positioning
+                    container.appendChild(marker);
+                });
+            }
+
+            images.forEach(img => {
+                img.style.transformOrigin = 'center center';
+                img.style.cursor = 'grab';
+                img.style.userSelect = 'none';
+
+                img.addEventListener('wheel', function (event) {
+                    event.preventDefault();
+                    let newScale = sharedState.scale + (event.deltaY < 0 ? zoomStep : -zoomStep);
+                    newScale = Math.min(Math.max(newScale, minZoom), maxZoom);
+                    sharedState.scale = newScale;
+                    applyTransformToAll();
+                });
+
+                img.addEventListener('mousedown', function (event) {
+                    event.preventDefault();
+                    sharedState.isDragging = true;
+                    sharedState.dragged = false;
+                    sharedState.dragStartX = event.clientX - sharedState.translateX;
+                    sharedState.dragStartY = event.clientY - sharedState.translateY;
+                    images.forEach(im => im.style.cursor = 'grabbing');
+                });
+
+                img.addEventListener('mousemove', function (event) {
+                    if (sharedState.isDragging) {
+                        sharedState.dragged = true;
+                    }
+                });
+
+                // Remove click marker handler to avoid single click marking
+
+                // Add double-click handler to place markers
+                img.addEventListener('dblclick', function (event) {
+                    // Only place marker if NOT dragged (i.e., not part of drag-release)
+                    if (!sharedState.dragged) {
+                        const rect = img.getBoundingClientRect();
+                        const relX = (event.clientX - rect.left) / rect.width;
+                        const relY = (event.clientY - rect.top) / rect.height;
+                        addMarkersAtRelativePosition(relX, relY);
+                    }
+                });
+            });
+
+            window.addEventListener('mousemove', function (event) {
+                if (!sharedState.isDragging) return;
+                sharedState.translateX = event.clientX - sharedState.dragStartX;
+                sharedState.translateY = event.clientY - sharedState.dragStartY;
+                applyTransformToAll();
+            });
+
+            window.addEventListener('mouseup', function () {
+                if (sharedState.isDragging) {
+                    sharedState.isDragging = false;
+                    images.forEach(im => im.style.cursor = 'grab');
+                }
+            });
         });
     </script>
 </body>

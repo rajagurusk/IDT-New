@@ -471,15 +471,24 @@
             <button class="menu-btn" type="button">
                 <span class="menu-icon"><img src="~/images/compare.png" alt="Compare" width="32" height="32" /></span> Compare
             </button>
-            <button class="menu-btn" type="button">
-                <span class="menu-icon"><img src="~/images/result.png" alt="Result" width="32" height="32" /></span> Result
+            <!-- Button -->
+            <button id="resultBtn" class="menu-btn" type="button">
+                <span class="menu-icon">
+                    <img src="images/result.png" alt="Result" width="32" height="32" />
+                </span>
+                Result
             </button>
+
+
             <button id="historyBtn" class="menu-btn" type="button">
                 <span class="menu-icon"><img src="~/images/history.png" alt="History" width="32" height="32" /></span> History
             </button>
 
-            <button class="menu-btn" type="button">
-                <span class="menu-icon"><img src="~/images/certificate.png" alt="Certificate" width="32" height="32" /></span> Certificate
+            <button id="certificateBtn" class="menu-btn" type="button">
+                <span class="menu-icon">
+                    <img src="images/certificate.png" alt="Certificate" width="32" height="32" />
+                </span>
+                Certificate
             </button>
         </div>
         <div class="idt-footer-info">
@@ -584,6 +593,15 @@
     <script>
         document.getElementById("historyBtn").addEventListener("click", function() {
             window.location.href = "/History"; // Or your MVC route like '/History/Index'
+        });
+    </script>
+    <!-- Script -->
+    <script>
+        document.getElementById('resultBtn').addEventListener('click', function() {
+            window.location.href = '/Result';
+        });
+                document.getElementById('certificateBtn').addEventListener('click', function() {
+            window.location.href = '/Certificate';
         });
     </script>
 </body>

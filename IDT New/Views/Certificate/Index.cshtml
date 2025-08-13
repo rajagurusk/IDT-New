@@ -1,0 +1,565 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Certificate | IDT</title>
+    <link rel="stylesheet" href="history.css" /> <!-- reuse your main stylesheet -->
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #fff;
+        }
+
+        .idt-header {
+            width: 100%;
+            height: 60px; /* adjust if needed */
+            display: flex;
+            align-items: center;
+            position: relative; /* for absolute centering */
+            padding: 0 24px;
+            border-bottom: 1px solid #ede9d2;
+            background: #fff;
+            box-sizing: border-box;
+        }
+
+        .header-left-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2.2rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #222;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        .header-right-buttons {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-left: auto;
+            background-color: transparent;
+            border: none;
+        }
+
+        .header-icon-btn {
+            border: none;
+            background-color: transparent;
+            outline: none;
+            box-shadow: none;
+        }
+
+        .main-wrap {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 32px;
+            min-height: 100vh;
+            box-sizing: border-box;
+            padding: 24px 0 90px 0;
+        }
+
+        .left-form {
+            background: #fffde7;
+            border-right: 1px solid #fce9a1;
+            min-width: 320px;
+            max-width: 320px;
+            padding: 40px 24px;
+            box-sizing: border-box;
+        }
+
+        .idt-logo {
+            width: 100px;
+            display: block;
+            margin: -10px auto 12px auto;
+        }
+        .main-content {
+            display: flex;
+            flex: 1;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* .certificate-panel {
+            width: 900px;
+            margin: 40px auto;
+            padding: 30px;
+            border: 1.5px solid #f3e29c;
+            border-radius: 18px;
+            background: #fffbe6;
+            box-shadow: 0 8px 32px rgba(243, 226, 156, 0.12);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        } */
+
+        .certificate-title {
+            font-size: 2.1rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 24px;
+            letter-spacing: 2px;
+        }
+
+        .certificate-logo {
+            width: 100px;
+            margin-bottom: 14px;
+            border-radius: 38px;
+            display: block; /* Make it a block element */
+            margin-left: auto; /* Auto margins on left and right */
+            margin-right: auto;
+        }
+
+
+        .certificate-form {
+            width: 100%;
+            max-width: 540px;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 14px 16px;
+            margin-bottom: 28px;
+        }
+
+        .cert-label {
+            font-weight: 600;
+            color: #7c6b2d;
+            align-self: center;
+        }
+
+        .cert-input {
+            background: #fff;
+            border: 1.2px solid #efd272;
+            border-radius: 7px;
+            padding: 7px 12px;
+            font-size: 1.1rem;
+            color: #222;
+            width: 95%;
+            box-sizing: border-box;
+        }
+
+        .cert-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px; /* space between buttons */
+            margin-top: 10px;
+            align-items: stretch; /* buttons take full width if desired */
+        }
+
+            .cert-actions button {
+                width: 100%; /* make buttons full width, optional */
+                border: 1.2px solid #f3e29c;
+                background: #ffe9a6;
+                border-radius: 10px;
+                padding: 8px 22px;
+                font-weight: 600;
+                cursor: pointer;
+                font-size: 1.05rem;
+            }
+
+                .cert-actions button:hover {
+                    background: #f8d863;
+                }
+
+
+        /* Middle panel styling (video) */
+        .middle-panel {
+            width: 100%;
+            border: 2px solid #f7b913;
+            margin: 0 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            height: calc(100vh - 60px - 90px); /* Adjust for header/footer height */
+            max-height: 725px;
+        }
+
+        .certificate-a4 {
+            width: 800px; /* A4 width at 96dpi */
+            min-height: 1122px; /* A4 height at 96dpi */
+            background: #fffde4;
+            border: 2px solid #fac600;
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            box-sizing: border-box;
+            box-shadow: 0 4px 24px rgba(249,206,30,0.10);
+            margin-bottom: 0;
+        }
+
+        .cert-logo-row {
+            width: 100%; /* or desired container width */
+            text-align: center;
+            margin-top: 10px;
+        }
+
+
+        .idt-logo {
+            width: 500px;
+            height: 150px;
+        }
+
+        .cert-top-underline {
+            margin: 18px 0 10px 0;
+            border-bottom: 5px solid #ecc204;
+            width: 90%;
+        }
+
+        .cert-info {
+            margin-top: 18px;
+            margin-bottom: 30px;
+            width: 88%;
+            font-size: 1.13rem;
+            color: #222;
+            display: flex;
+            justify-content: space-between; /* space between left and right columns */
+            gap: 40px; /* space between columns */
+            box-sizing: border-box;
+        }
+
+        .cert-info-left,
+        .cert-info-right {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .cert-info-left {
+            max-width: 55%; /* or adjust per your desired width */
+        }
+
+        .cert-info-right {
+            max-width: 40%; /* or adjust */
+        }
+
+
+        .cert-row {
+            margin: 7px 0;
+            display: flex;
+            font-size: 1.08rem;
+        }
+
+        .cert-label {
+            color: #6a6237;
+            font-weight: 600;
+            width: 170px;
+            display: inline-block;
+        }
+
+        .cert-result-image {
+            width: 92%;
+            text-align: center;
+            margin-top: 24px;
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* background: #f7e1a0; */
+            border-radius: 14px;
+            padding: 30px 0 30px 0;
+        }
+
+        .result-title {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #222;
+            margin-bottom: 16px;
+            letter-spacing: 2px;
+        }
+
+        .result-img {
+            width: 520px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 1px 12px rgba(180,141,27,0.08);
+            border: 2px solid #d8bf76;
+        }
+
+        .cert-bottom-footer {
+            width: 100%;
+            background: #fac600;
+            color: #6a6237;
+            font-weight: 700;
+            text-align: center;
+            font-size: 1.18rem;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 22px 0 14px 0;
+            border-bottom-left-radius: 14px;
+            border-bottom-right-radius: 14px;
+            letter-spacing: 1.6px;
+        }
+
+
+            /* .middle-panel video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            } */
+
+        /* Right panel */
+        .right-panel {
+            flex: 0 0 400px;
+            background-color: #fafefe;
+            padding: 10px;
+            border-left: 1px solid #f0e7b8;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .idt-footer-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #fdeec2;
+            border-top: 1.5px solid #f0db26;
+            box-shadow: 0 -2px 16px rgba(240,219,38,0.2);
+            user-select: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1000;
+            font-size: 1rem;
+        }
+
+            .idt-footer-container * {
+                user-select: none;
+            }
+
+            .idt-footer-container a,
+            .idt-footer-container button {
+                cursor: pointer;
+                background: transparent;
+                border: none;
+                padding: 10px 12px;
+                margin: 0 4px;
+                border-radius: 8px;
+                transition: background-color 0.25s ease;
+                font-weight: 600;
+                color: #222;
+                font-size: 1rem;
+            }
+
+                .idt-footer-container a:hover,
+                .idt-footer-container button:hover {
+                    background: #f8d863;
+                    color: #333;
+                }
+
+        .idt-footer-menu {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 6px 0;
+        }
+
+        .footer-separator {
+            width: 1px;
+            height: 24px;
+            background: #aaa247;
+            margin: 0 15px;
+        }
+
+        .idt-footer-info {
+            background: #f4cb00;
+            padding: 10px 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #3b3a33;
+            font-weight: 700;
+        }
+
+        .footer-left, .footer-right {
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="idt-header">
+        <div class="header-left-content">
+            <div class="header-icons"></div>
+            <div class="header-extra">
+                <img src="~/images/IDT only logo.png" alt="SYD Logo" style="height:100px; vertical-align:middle; margin-right:0px;" />
+                <span><strong>SYD-100</strong></span>
+            </div>
+        </div>
+        <div class="header-title">CERTIFICATE</div>
+        <div class="header-right-buttons">
+            <button type="button" class="header-icon-btn" title="Help" onclick="onHeadsetClick()">
+                <img src="images/headset.png" alt="Headset" width="32" height="32" />
+            </button>
+            <button type="button" class="header-icon-btn" title="Back" onclick="onArrowClick()">
+                <img src="images/arrow.png" alt="Arrow" width="32" height="32" />
+            </button>
+            <button type="button" class="header-icon-btn" title="Power" onclick="onPowerClick()">
+                <img src="images/power.png" alt="Power" width="32" height="32" />
+            </button>
+        </div>
+    </div>
+    <div style="display: flex; flex: 1;">
+        <!-- Middle Panel -->
+        <div class="main-wrap">
+            <section class="certificate-a4">
+                <div class="cert-logo-row">
+                    <img src="images/IDT complete logo 2.png" alt="IDT Logo" class="idt-logo" />
+                </div>
+                <div class="cert-top-underline"></div>
+                <div class="cert-info">
+                    <div class="cert-info-left">
+                        <div class="cert-row"><span class="cert-label">Date:</span> <span id="certDispDate"></span></div>
+                        <div class="cert-row"><span class="cert-label">Customer:</span> <span id="certDispCust"></span></div>
+                        <div class="cert-row"><span class="cert-label">Stone Details:</span> <span id="certDispStone"></span></div>
+                        <div class="cert-row"><span class="cert-label">Description:</span> <span id="certDispDesc"></span></div>
+                    </div>
+                    <div class="cert-info-right">
+                        <div class="cert-row"><span class="cert-label">QR/Report Gem:</span> <span id="certDispQR"></span></div>
+                        <div class="cert-row"><span class="cert-label">Natural:</span> <span id="certDispNatural"></span></div>
+                        <div class="cert-row"><span class="cert-label">CVD:</span> <span id="certDispCVD"></span></div>
+                        <div class="cert-row"><span class="cert-label">HPHT:</span> <span id="certDispHPHT"></span></div>
+                    </div>
+                </div>
+
+                <div class="cert-result-image">
+                    <span class="result-title">REPORT IMAGE</span>
+                    <img src="~/images/IDT complete jklogo.png" alt="Result" class="result-img" />
+                    <!-- Replace above src with your report image if needed -->
+                </div>
+                <div class="cert-bottom-footer">
+                    @* <span>IDT Gemological Laboratories Worldwide</span> *@
+                </div>
+            </section>
+
+            <!-- Right Panel -->
+        <aside class="right-panel">
+            <div class="certificate-panel">
+                <img src="images/IDT half logo.png" alt="Certificate Logo" class="certificate-logo" />
+                @* <div class="certificate-title">Certificate</div> *@
+                <form class="certificate-form">
+                    <span class="cert-label">Date:</span>
+                    <input type="text" class="cert-input" id="certDate" readonly>
+                    <span class="cert-label">Customer Name:</span>
+                    <input type="text" class="cert-input" id="custName">
+                    <span class="cert-label">Stone Details:</span>
+                    <input type="text" class="cert-input" id="stoneDetails">
+                    <span class="cert-label">Description:</span>
+                    <input type="text" class="cert-input" id="desc">
+                    <span class="cert-label">QR/Report Gem:</span>
+                    <input type="text" class="cert-input" id="qrGem">
+                    <span class="cert-label">Natural:</span>
+                    <input type="text" class="cert-input" id="natural">
+                    <span class="cert-label">CVD:</span>
+                    <input type="text" class="cert-input" id="cvd">
+                    <span class="cert-label">HPHT:</span>
+                    <input type="text" class="cert-input" id="hpht">
+                </form>
+                <div class="cert-actions">
+                    <button type="button" onclick="save()">Save</button>
+                    <button type="button" onclick="sendToCloud()">Send To Cloud</button>
+                    <button type="button" onclick="saveToUSB()">Save To USB</button>
+                    <button type="button" onclick="window.print()">Print</button>
+                    <button type="button" onclick="generateCertificate()">Generate Certificate</button>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+
+    <footer class="idt-footer-container">
+        <div class="idt-footer-menu">
+            <button class="menu-btn" id="scanBtn" type="button" title="Scan">
+                <span class="menu-icon"><img src="~/images/scan.png" alt="Scan" width="32" height="32" /></span> Scan
+            </button>
+            <button class="menu-btn" type="button">
+                <span class="menu-icon"><img src="~/images/home.png" alt="Home" width="32" height="32" /></span> Home
+            </button>
+            <button class="menu-btn" type="button">
+                <span class="menu-icon"><img src="~/images/compare.png" alt="Compare" width="32" height="32" /></span> Compare
+            </button>
+            <!-- Button -->
+            <button id="resultBtn" class="menu-btn" type="button">
+                <span class="menu-icon">
+                    <img src="images/result.png" alt="Result" width="32" height="32" />
+                </span>
+                Result
+            </button>
+
+
+            <button id="historyBtn" class="menu-btn" type="button">
+                <span class="menu-icon"><img src="~/images/history.png" alt="History" width="32" height="32" /></span> History
+            </button>
+
+            <button id="certificateBtn" class="menu-btn" type="button">
+                <span class="menu-icon">
+                    <img src="images/certificate.png" alt="Certificate" width="32" height="32" />
+                </span>
+                Certificate
+            </button>
+        </div>
+        <div class="idt-footer-info">
+            <div class="footer-left">IDT Gemological Laboratories Worldwide</div>
+            <div class="footer-separator"></div>
+            <div class="footer-right">www.idtworldwide.com</div>
+        </div>
+    </footer>
+        <script>
+            // Pre-fill certificate date
+            document.addEventListener("DOMContentLoaded", function() {
+                document.getElementById('certDate').value = new Date().toLocaleDateString();
+            });
+            function save() {
+                document.getElementById('certDispDate').textContent = document.getElementById('certDate').value;
+                document.getElementById('certDispCust').textContent = document.getElementById('custName').value;
+                document.getElementById('certDispStone').textContent = document.getElementById('stoneDetails').value;
+                document.getElementById('certDispDesc').textContent = document.getElementById('desc').value;
+                document.getElementById('certDispQR').textContent = document.getElementById('qrGem').value;
+                document.getElementById('certDispNatural').textContent = document.getElementById('natural').value;
+                document.getElementById('certDispCVD').textContent = document.getElementById('cvd').value;
+                document.getElementById('certDispHPHT').textContent = document.getElementById('hpht').value;
+            }
+        </script>
+        <script>
+            function onHeadsetClick() {
+                window.location.href = '/Help'; // For MVC route
+            }
+                    function onArrowClick() {
+                window.history.back(); // go back to the previous page in browser history
+            }
+
+        </script>
+        <script>
+            document.getElementById("historyBtn").addEventListener("click", function() {
+                window.location.href = "/History"; // Or your MVC route like '/History/Index'
+            });
+        </script>
+        <!-- Script -->
+        <script>
+            document.getElementById('resultBtn').addEventListener('click', function() {
+                window.location.href = '/Result';
+            });
+                    document.getElementById('certificateBtn').addEventListener('click', function() {
+                window.location.href = '/Certificate';
+            });
+        </script>
+</body>
+</html>

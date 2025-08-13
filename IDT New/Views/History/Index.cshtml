@@ -338,6 +338,7 @@
             <table class="history-table">
                 <thead>
                     <tr>
+                        <th>Sr. No.</th>
                         <th>Lot No.</th>
                         <th>ID</th>
                         <th>Size</th>
@@ -349,6 +350,7 @@
                 </tbody>
             </table>
         </section>
+
 
         <!-- Right Panel for Captured Image -->
         <aside class="rightbar">
@@ -376,27 +378,33 @@
     </footer>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function(){
-            // Example: load stored values (replace with backend call later)
-            const lotNo = localStorage.getItem('lotNo') || 'L001';
-            const gemId = localStorage.getItem('gemId') || 'ID123';
-            const size = localStorage.getItem('size') || '5.2 mm';
-            const remarks = localStorage.getItem('remarks') || 'Sample record';
+                document.addEventListener("DOMContentLoaded", function () {
+            // Example static data array (replace with localStorage or backend data)
+            const data = [
+                { lotNo: 'Lot-001', id: 'A123', size: 'Medium', remarks: 'OK' },
+                { lotNo: 'Lot-002', id: 'B456', size: 'Large', remarks: 'Pending' }
+            ];
+
+            const tbody = document.getElementById('historyData');
+            tbody.innerHTML = ''; // Clear old rows if needed
+
+            data.forEach((item, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${index + 1}</td>  <!-- Sr. No. -->
+                    <td>${item.lotNo}</td>
+                    <td>${item.id}</td>
+                    <td>${item.size}</td>
+                    <td>${item.remarks}</td>
+                `;
+                tbody.appendChild(row);
+            });
+
+            // Example: set captured image for the right bar
             const imageUrl = localStorage.getItem('capturedImageUrl') || 'images/placeholder.png';
-
-            // Populate table
-            const tableBody = document.getElementById("historyData");
-            const newRow = `<tr>
-                              <td>${lotNo}</td>
-                              <td>${gemId}</td>
-                              <td>${size}</td>
-                              <td>${remarks}</td>
-                            </tr>`;
-            tableBody.innerHTML += newRow;
-
-            // Set captured image
             document.getElementById('capturedImage').src = imageUrl;
         });
+
     </script>
     <script>
         function onHeadsetClick() {
