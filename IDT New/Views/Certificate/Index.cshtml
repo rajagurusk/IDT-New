@@ -490,12 +490,26 @@
             <button class="menu-btn" id="scanBtn" type="button" title="Scan">
                 <span class="menu-icon"><img src="~/images/scan.png" alt="Scan" width="32" height="32" /></span> Scan
             </button>
-            <button class="menu-btn" type="button">
-                <span class="menu-icon"><img src="~/images/home.png" alt="Home" width="32" height="32" /></span> Home
-            </button>
-            <button class="menu-btn" type="button">
-                <span class="menu-icon"><img src="~/images/compare.png" alt="Compare" width="32" height="32" /></span> Compare
-            </button>
+                <button class="menu-btn" type="button" id="homeBtn">
+                    <span class="menu-icon"><img src="~/images/home.png" alt="Home" width="32" height="32" /></span> Home
+                </button>
+
+                <script>
+                    document.getElementById('homeBtn').addEventListener('click', function() {
+                        window.location.href = '/Home'; // Change '/' to your actual homepage URL
+                    });
+                </script>
+
+                <button class="menu-btn" type="button" id="compareBtn">
+                    <span class="menu-icon"><img src="~/images/compare.png" alt="Compare" width="32" height="32" /></span> Compare
+                </button>
+
+                <script>
+                    document.getElementById('compareBtn').addEventListener('click', function() {
+                        window.location.href = '/Compare'; // Change to actual compare page URL
+                    });
+                </script>
+
             <!-- Button -->
             <button id="resultBtn" class="menu-btn" type="button">
                 <span class="menu-icon">

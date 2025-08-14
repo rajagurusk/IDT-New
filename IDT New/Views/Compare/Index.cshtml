@@ -585,18 +585,26 @@
                 </span>
                 Scan
             </a>
-            <a class="menu-btn" href="/Home">
-                <span class="menu-icon">
-                    <img src="~/images/home.png" alt="Home" width="32" height="32" />
-                </span>
-                Home
-            </a>
-            <a class="menu-btn" href="/Compare">
-                <span class="menu-icon">
-                    <img src="~/images/compare.png" alt="Compare" width="32" height="32" />
-                </span>
-                Compare
-            </a>
+            <button class="menu-btn" type="button" id="homeBtn">
+                <span class="menu-icon"><img src="~/images/home.png" alt="Home" width="32" height="32" /></span> Home
+            </button>
+
+            <script>
+                document.getElementById('homeBtn').addEventListener('click', function() {
+                    window.location.href = '/Home'; // Change '/' to your actual homepage URL
+                });
+            </script>
+
+            <button class="menu-btn" type="button" id="compareBtn">
+                <span class="menu-icon"><img src="~/images/compare.png" alt="Compare" width="32" height="32" /></span> Compare
+            </button>
+
+            <script>
+                document.getElementById('compareBtn').addEventListener('click', function() {
+                    window.location.href = '/compare'; // Change to actual compare page URL
+                });
+            </script>
+
             <a class="menu-btn" href="/Result">
                 <span class="menu-icon">
                     <img src="~/images/result.png" alt="Result" width="32" height="32" />
@@ -627,6 +635,20 @@
             window.history.back(); // go back to the previous page in browser history
         }
 
+    </script>
+    <script>
+        document.getElementById("historyBtn").addEventListener("click", function() {
+            window.location.href = "/History"; // Or your MVC route like '/History/Index'
+        });
+    </script>
+    <!-- Script -->
+    <script>
+        document.getElementById('resultBtn').addEventListener('click', function() {
+            window.location.href = '/Result';
+        });
+                document.getElementById('certificateBtn').addEventListener('click', function() {
+            window.location.href = '/Certificate';
+        });
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {

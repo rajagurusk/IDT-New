@@ -343,13 +343,30 @@
                         <th>ID</th>
                         <th>Size</th>
                         <th>Remarks</th>
+                        <th>Date</th>
+                        <th>Timestamp</th>
+                        <th>Folder</th>
                     </tr>
                 </thead>
                 <tbody id="historyData">
-                    <!-- Rows will be inserted here -->
+                    <!-- Rows will be inserted here dynamically -->
+                    <!-- Example static row -->
+                    <!--
+                    <tr>
+                        <td>1</td>
+                        <td>LOT-001</td>
+                        <td>ID12345</td>
+                        <td>5.2mm</td>
+                        <td>Clean</td>
+                        <td>2025-08-13</td>
+                        <td>14:33:25</td>
+                        <td>/images/folder1/</td>
+                    </tr>
+                    -->
                 </tbody>
             </table>
         </section>
+
 
 
         <!-- Right Panel for Captured Image -->
@@ -364,8 +381,24 @@
     <footer class="idt-footer-container">
         <div class="idt-footer-menu">
             <button><img src="~/images/scan.png" width="32" height="32"> Scan</button>
-            <button><img src="~/images/home.png" width="32" height="32"> Home</button>
-            <button><img src="~/images/compare.png" width="32" height="32"> Compare</button>
+            <button class="menu-btn" type="button" id="homeBtn">
+                <span class="menu-icon"><img src="~/images/home.png" alt="Home" width="32" height="32" /></span> Home
+            </button>
+
+            <script>
+                document.getElementById('homeBtn').addEventListener('click', function() {
+                    window.location.href = '/Home'; // Change '/' to your actual homepage URL
+                });
+            </script>
+            <button class="menu-btn" type="button" id="compareBtn">
+                <span class="menu-icon"><img src="~/images/compare.png" alt="Compare" width="32" height="32" /></span> Compare
+            </button>
+
+            <script>
+                document.getElementById('compareBtn').addEventListener('click', function() {
+                    window.location.href = '/Compare'; // Change to actual compare page URL
+                });
+            </script>
             <button><img src="~/images/result.png" width="32" height="32"> Result</button>
             <button><img src="~/images/history.png" width="32" height="32"> History</button>
             <button><img src="~/images/certificate.png" width="32" height="32"> Certificate</button>
@@ -378,34 +411,45 @@
     </footer>
 
     <script>
-                document.addEventListener("DOMContentLoaded", function () {
-            // Example static data array (replace with localStorage or backend data)
-            const data = [
-                { lotNo: 'Lot-001', id: 'A123', size: 'Medium', remarks: 'OK' },
-                { lotNo: 'Lot-002', id: 'B456', size: 'Large', remarks: 'Pending' }
-            ];
+        document.addEventListener("DOMContentLoaded", function () {
 
-            const tbody = document.getElementById('historyData');
-            tbody.innerHTML = ''; // Clear old rows if needed
-
-            data.forEach((item, index) => {
-                const row = document.createElement('tr');
+            // Function to add one row into the history table
+            function addHistoryRow(srNo, lotNo, id, size, remarks, date, time, folder) {
+                const tbody = document.getElementById("historyData");
+                const row = document.createElement("tr");
                 row.innerHTML = `
-                    <td>${index + 1}</td>  <!-- Sr. No. -->
-                    <td>${item.lotNo}</td>
-                    <td>${item.id}</td>
-                    <td>${item.size}</td>
-                    <td>${item.remarks}</td>
+                    <td>${srNo}</td>
+                    <td>${lotNo}</td>
+                    <td>${id}</td>
+                    <td>${size}</td>
+                    <td>${remarks}</td>
+                    <td>${date}</td>
+                    <td>${time}</td>
+                    <td>${folder}</td>
                 `;
                 tbody.appendChild(row);
+            }
+
+            // Example data array (replace this with your localStorage or API data)
+            const data = [
+                { lotNo: 'Lot-001', id: 'A123', size: 'Medium', remarks: 'OK', date: '2025-08-13', time: '14:30:00', folder: 'folder1' },
+                { lotNo: 'Lot-002', id: 'B456', size: 'Large', remarks: 'Pending', date: '2025-08-12', time: '10:15:00', folder: 'folder2' }
+            ];
+
+            // Populate the table
+            const tbody = document.getElementById('historyData');
+            tbody.innerHTML = ''; // Clear previous entries
+
+            data.forEach((item, index) => {
+                addHistoryRow(index + 1, item.lotNo, item.id, item.size, item.remarks, item.date, item.time, item.folder);
             });
 
             // Example: set captured image for the right bar
             const imageUrl = localStorage.getItem('capturedImageUrl') || 'images/placeholder.png';
             document.getElementById('capturedImage').src = imageUrl;
         });
-
     </script>
+
     <script>
         function onHeadsetClick() {
             window.location.href = '/Help'; // For MVC route
@@ -414,6 +458,20 @@
             window.history.back(); // go back to the previous page in browser history
         }
 
+    </script>
+    <script>
+        document.getElementById("historyBtn").addEventListener("click", function() {
+            window.location.href = "/History"; // Or your MVC route like '/History/Index'
+        });
+    </script>
+    <!-- Script -->
+    <script>
+        document.getElementById('resultBtn').addEventListener('click', function() {
+            window.location.href = '/Result';
+        });
+                document.getElementById('certificateBtn').addEventListener('click', function() {
+            window.location.href = '/Certificate';
+        });
     </script>
 </body>
 </html>
